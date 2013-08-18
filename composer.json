@@ -1,6 +1,6 @@
 {
     "require": {
-        "hathoora/hathoora": "dev-master"
+	"hathoora/core": "dev-master"
     }
 }
 
