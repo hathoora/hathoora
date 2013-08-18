@@ -1,0 +1,7 @@
+# configuration file for 'prod' environment
+# For more information please visit https://github.com/attozk/hathoora/wiki/Configuration#application-configuration
+
+# Import config which will be overwritten
+imports:
+    # Import configs from sample/site
+    - { resource: ../../site/config/config_prod.yml }

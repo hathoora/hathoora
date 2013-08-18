@@ -1,0 +1,44 @@
+#hathoora_debug { font-size:12px; font-family:arial; position: fixed; bottom: 0%; right: 0px; background: #D5D6D2;  width:100%; height: 30px; border-top:1px solid #BCBCBC; z-index:1000; vertical-align:middle; line-height:16px; }
+#hathoora_debug > div { border-right:1px solid #BCBCBC; float:left; padding-left:9px; padding-right:8px; height:30px; padding-top:7px; }
+#hathoora_debug div.hathoora_logo { padding-left:5px; }
+#hathoora_debug div.hathoora_logo img { vertical-align:top !important; }
+#hathoora_debug div.hathoora_summary { float:right; border-right:none; border-left:1px solid #BCBCBC; padding-top:0;  }
+
+/* common properties for toggle sections */
+#hathoora_debug div.hathoora_opened { background:#CCDAB0; border-top:1px solid #CCDAB0; position:relative; top:-1px; }
+#hathoora_debug div.hathoora_section_toggle { cursor:pointer; }
+#hathoora_debug div.hathoora_section_table_wrapper { display:none;  background:#CCDAB0; height:280px;  padding:15px 0 15px 0; left:0px; bottom:31px; position:fixed; width:100%; border-top:1px solid #BCBCBC;  }
+#hathoora_debug div.hathoora_section_table_wrapper .hathoora_section_table { max-height:240px; overflow:auto; clear:both; }
+#hathoora_debug div.hathoora_section_table_wrapper table { width:98%; border-collapse:collapse; font-size:12px; border:1px solid #BCBCBC; }
+#hathoora_debug div.hathoora_section_table_wrapper table thead th { background:#D5D6D2; text-align:left; padding-left:10px; border-right:1px solid #BCBCBC; border-bottom:1px solid #BCBCBC;  }    
+#hathoora_debug div.hathoora_section_table_wrapper table tbody td { padding-left: 10px; border-right:1px solid #BCBCBC; border-bottom:1px solid #BCBCBC;   }
+#hathoora_debug div.hathoora_section_table_wrapper table tbody td.n { padding:0 10px 0 0; text-align:right; }
+#hathoora_debug div.hathoora_section_table_wrapper table tr.odd { background:#F4F4F4; }
+#hathoora_debug div.hathoora_section_table_wrapper table tbody tr.even { background:#EBEBEB; }
+/* common properties for tabs */
+#hathoora_debug div.hathoora_section_tabs { padding-left:15px; }
+#hathoora_debug div.hathoora_section_tabs .hathoora_section_tab { float:left; padding:5px 8px; background:#609440; margin-right:2px; color:#fff; border:1px solid #617566; border-bottom:none; cursor:pointer; }
+#hathoora_debug div.hathoora_section_tabs .hathoora_section_tab_selected {  color:#609440; background:#fff; border:1px solid #BCBCBC; border-bottom:none; } 
+#hathoora_debug div.hathoora_section_tabs .hathoora_section_tab_content { display:block;  max-height:240px; overflow:auto; clear:both; background:#fff; border:1px solid #BCBCBC; width:97%; padding:10px; border-top:none; }
+
+
+/* config */
+#hathoora_debug div.hathoora_config .hathoora_section_table { max-height:280px; overflow:auto; }
+#hathoora_debug div.hathoora_config table thead th.hathoora_config_key { width:20%; }
+#hathoora_debug div.hathoora_config table thead th.hathoora_config_value { width:80%; }
+
+/*  log */
+#hathoora_debug div.hathoora_log table thead th.hathoora_log_num { width:2%; }
+#hathoora_debug div.hathoora_log table thead th.hathoora_log_time { width:7%; }
+#hathoora_debug div.hathoora_log table thead th.hathoora_log_level { width:8%; }
+#hathoora_debug div.hathoora_log table thead th.hathoora_log_memory { width:7%; }
+#hathoora_debug div.hathoora_log table thead th.hathoora_log_message { width:77%; }
+
+/* profiling */
+#hathoora_debug div.hathoora_profiling table thead th.hathoora_profile_num { width:2%; }
+#hathoora_debug div.hathoora_profiling table thead th.hathoora_profile_time { width:3%; }
+#hathoora_debug div.hathoora_profiling table thead th.hathoora_profile_name { width:7%; }
+#hathoora_debug div.hathoora_profiling table thead th.hathoora_profile_message { padding-right:10px; }
+#hathoora_debug div.hathoora_profiling table thead th.hathoora_profile_took { width:7%; }
+#hathoora_debug div.hathoora_profiling table tbody td span { color:#BCBCBC; font-size:11px; }
+#hathoora_debug div.hathoora_profiling  .hathoora_profile_error { padding:2px 4px; border:1px solid #FF0000; color:#990000; background:#FFE8E8;  }
