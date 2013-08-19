@@ -2,7 +2,6 @@
 namespace site\controller;
 
 use hathoora\controller\controller;
-use hathoora\grid\grid;
 
 /**
  * Default controller
@@ -17,11 +16,18 @@ class defaultController extends controller
      */
     public function index()
     {
+        // redirect to installation page
+        $response = $this->response();
+        $response->redirect('/docs/view/installation', 302);
+
+        return $response;
+
         #$db2 = \hathoora\database\dbAdapter::getConnection('db2');
         #printr($db2->fetchArray('SELECT NOW();'));
         #die;
 
-        // lazy loaded connection
+        /*
+         * /// lazy loaded connection
         $default = \hathoora\database\dbAdapter::getConnection('default');
         try
         {
@@ -39,7 +45,7 @@ class defaultController extends controller
         {
             echo $e->getMessage();
         }
-        
+        */
         
         $arrTplParams = array(
             'bodyClass' => 'homepage',
@@ -48,5 +54,5 @@ class defaultController extends controller
         $response = $this->response($template);
         
         return $response;
-    }    
+    }
 }

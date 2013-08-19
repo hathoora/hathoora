@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "86651cf6641a572cbadd71b0d4bd9b76",
+    "hash": "696a0ae7199815389447b15c82f012cf",
     "packages": [
         {
             "name": "hathoora/core",
@@ -45,6 +45,47 @@
                 "framework"
             ],
             "time": "2013-08-18 03:47:53"
+        },
+        {
+            "name": "hathoora/grid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/attozk/hathoora-grid.git",
+                "reference": "ea95ed6ea931be987384ce30d51f244c1a2b0f84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/attozk/hathoora-grid/zipball/ea95ed6ea931be987384ce30d51f244c1a2b0f84",
+                "reference": "ea95ed6ea931be987384ce30d51f244c1a2b0f84",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "hathoora\\grid": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Usman Malik",
+                    "email": "attozk@khat.pk",
+                    "homepage": "http://attozk.mine.pk"
+                }
+            ],
+            "description": "Hathoora Grid",
+            "homepage": "http://hathoora.root.pk",
+            "keywords": [
+                "grid"
+            ],
+            "time": "2013-08-18 17:05:20"
         }
     ],
     "packages-dev": [
@@ -55,7 +96,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "hathoora/core": 20
+        "hathoora/core": 20,
+        "hathoora/grid": 20
     },
     "platform": [
 

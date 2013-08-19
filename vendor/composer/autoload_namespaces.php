@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'hathoora\\grid' => array($vendorDir . '/hathoora/grid/src'),
     'hathoora' => array($vendorDir . '/hathoora/core/src'),
 );

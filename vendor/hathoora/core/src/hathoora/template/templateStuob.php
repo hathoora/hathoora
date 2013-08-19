@@ -59,12 +59,12 @@ class templateStuob extends container implements templateInterface
      * @var array
      */
     private $var;
-    
+
     /**
      * stores blocks
      */
     private $blocks = null;
-    
+
     /**
      * constructor
      *
@@ -111,7 +111,7 @@ class templateStuob extends container implements templateInterface
                 $this->assign($k, $v);
             }
         }
-    }    
+    }
 
     /**
      * Append variable to be used in template
@@ -133,40 +133,40 @@ class templateStuob extends container implements templateInterface
     {
         return $this->var[$var];
     }
-    
+
     /**
      * get assigned vars
      */
     public function __getVars()
     {
         return $this->var;
-    }    
+    }
 
-     /**
+    /**
      * Include a template
-     * 
+     *
      * @param string $file if starts with / then we consider is absolute path, otherwise its relative to template_dir
      */
     public function __load($file, $vars = array())
     {
-        if (substr($file, 0, 1) == '/')
+        if (realpath($file))
             $path = $file;
         else
             $path = $this->template_dir . $file;
-            
+
         if (file_exists($path))
         {
             $this->var['this'] =& $this;
             if (is_array($this->var))
                 extract($this->var);
-            
+
             // extract blocks
             if (is_array($this->blocks))
                 extract($this->blocks);
-            
+
             if (count($vars))
                 extract($vars);
-                
+
             // any _tpl_vars from controller\base class?
             $controller = $this->getController();
             if (is_array($controller->_tpl_vars))
@@ -178,17 +178,17 @@ class templateStuob extends container implements templateInterface
         else
             logger::log(logger::LEVEL_ERROR, 'Template ('. $file .') is not found.');
     }
-    
-     /**
+
+    /**
      * Include a template
-     * 
+     *
      * @param string $file if starts with / then we consider is absolute path, otherwise its relative to template_dir
      */
     public function load($file, $vars = array())
     {
         return $this->__load($file, $vars);
     }
-    
+
     /**
      * Returns flash message and clears flash session
      */
@@ -197,18 +197,18 @@ class templateStuob extends container implements templateInterface
         $request = $this->getRequest();
         $arrMessage = $request->sessionParam('httpFlash');
         $request->sessionParam('httpFlash', null, true);
-        
+
         return $arrMessage;
     }
-    
+
     /**
      * Returns flash message and clears flash session
      */
     public function getFlashMessage()
     {
         return $this->__getFlashMessage();
-    }    
-    
+    }
+
     /**
      * Display a template
      *
@@ -241,7 +241,7 @@ class templateStuob extends container implements templateInterface
             // should we cache it also?
             $this->write($template, $data, $cache_id, $group, $this->cache_lifetime);
         }
-        
+
         return $data;
     }
 
@@ -252,24 +252,24 @@ class templateStuob extends container implements templateInterface
      */
     public function paint($template)
     {
-        if (substr($template, 0, 1) == '/' && realpath($template))
+        if (realpath($template))
             $file = $template;
         else
             $file = $this->template_dir. DIRECTORY_SEPARATOR .$template;
-        
+
         $this->var['this'] =& $this;
         if (is_array($this->var))
             extract($this->var);
-        
+
         // extract blocks
         if (is_array($this->blocks))
             extract($this->blocks);
-        
+
         // any _tpl_vars from controller\base class?
         $controller = $this->getController();
         if (is_array($controller->_tpl_vars))
             extract($controller->_tpl_vars, EXTR_OVERWRITE);
-        
+
         $data = null;
         if ($this->templateExists($file))
         {
@@ -282,7 +282,7 @@ class templateStuob extends container implements templateInterface
             logger::log(logger::LEVEL_ERROR, 'Unable to load template: '. $file);
             throw new \exception('Unable to load template "'. $file.'"');
         }
-        
+
         return $data;
     }
 
@@ -294,7 +294,7 @@ class templateStuob extends container implements templateInterface
      * @param string $id Unique ID of this data
      * @param string $group Group to store data under
      * @param int $cache_time use this cache_time, instead of class cache_lifetime
-    */
+     */
     private function write($template, &$data, $id = null, $group = null, $cache_time = null)
     {
         if (!$this->caching || !$id) return false;
@@ -306,7 +306,7 @@ class templateStuob extends container implements templateInterface
         if (!$cache_time) return false;
 
         $filename = $this->getFilename($template, $id, $group);
-        
+
 
         if ($fp = @fopen($filename, 'xb'))
         {
@@ -342,7 +342,7 @@ class templateStuob extends container implements templateInterface
     public function __isCached($template, $id, $group = null)
     {
         if (!$id) return false;
-        
+
         $filename = $this->getFilename($template, $id, $group);
         if ($this->caching && file_exists($filename) && filemtime($filename) > time())
             return true;
@@ -387,11 +387,11 @@ class templateStuob extends container implements templateInterface
      */
     public function templateExists($template)
     {
-        if (substr($template, 0, 1) == '/' && realpath($template))
+        if (realpath($template))
             $file = $template;
         else
             $file = $this->template_dir. DIRECTORY_SEPARATOR .$template;
-            
+
         return file_exists($file);
     }
 
@@ -403,45 +403,45 @@ class templateStuob extends container implements templateInterface
     {
         ob_start();
     }
-    
-	/**
-	 * End a block
-	 *
-	 * @param string $name name of block
+
+    /**
+     * End a block
+     *
+     * @param string $name name of block
      * @url: https://github.com/Xeoncross/PHP-Template/blob/master/Template.php
-	 */
-	public function end($name)
-	{
+     */
+    public function end($name)
+    {
         $name = '__block_'. $name;
-		$output = ob_get_clean();
+        $output = ob_get_clean();
         $this->blocks[$name] = $output;
     }
-    
-	/**
-	 * Empty default block to be extended by child templates
-	 *
-	 * @param string $name of block
-     * @url: https://github.com/Xeoncross/PHP-Template/blob/master/Template.php
-	 */
-	public function block($name)
-	{
-        $name = '__block_'. $name;
-		if (isset($this->blocks[$name]))
-			echo $this->blocks[$name];
-	}
 
-	/**
-	 * Extend a parent template
-	 *
-	 * @param string $template name of template
-	 */
-	public function extend($template)
-	{
-		ob_end_clean(); // Ignore this child class and load the parent!
+    /**
+     * Empty default block to be extended by child templates
+     *
+     * @param string $name of block
+     * @url: https://github.com/Xeoncross/PHP-Template/blob/master/Template.php
+     */
+    public function block($name)
+    {
+        $name = '__block_'. $name;
+        if (isset($this->blocks[$name]))
+            echo $this->blocks[$name];
+    }
+
+    /**
+     * Extend a parent template
+     *
+     * @param string $template name of template
+     */
+    public function extend($template)
+    {
+        ob_end_clean(); // Ignore this child class and load the parent!
         $data = $this->paint($template);
         echo $data;
-	}
-    
+    }
+
     /**
      * Generate a block - helper function comes in handy.
      *
@@ -460,12 +460,12 @@ class templateStuob extends container implements templateInterface
     public function fragment($block_name, $template, $cache_id, $compile_id, $arrContent = null, $cache_time = false)
     {
     }
-    
+
     /**
-    * Configure class
-    *
-    * @param array $config
-    */
+     * Configure class
+     *
+     * @param array $config
+     */
     public function configure(&$config)
     {
         $arrConfig = array(
@@ -475,7 +475,7 @@ class templateStuob extends container implements templateInterface
             if (isset($config[$c]))
                 $this->$c = $config[$c];
     }
-    
+
     /**
      * Render a controller
      *
@@ -492,11 +492,11 @@ class templateStuob extends container implements templateInterface
             $nsClass = $controller;
         else
             $nsClass = $controllerObj->getControllerNameSpaceClass($controller);
-        
-        $response =  $controllerObj->invoke($nsClass, $action, $args); 
+
+        $response =  $controllerObj->invoke($nsClass, $action, $args);
         $response->render();
     }
-    
+
     /**
      * Render a controller
      *
