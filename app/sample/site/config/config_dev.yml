@@ -12,7 +12,8 @@ hathoora:
         enabled: 1
 
     logger:
-        profiling: 1
+        profiling:
+          enabled: 1
         logging:
             enabled: 1
             level: ERROR
