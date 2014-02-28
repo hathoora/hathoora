@@ -1,0 +1,15 @@
+# Define application or website that are being supported for prod environment
+app:
+    # admin site
+    admin:
+        pattern: '/sample/admin(|/)'
+        directory: sample
+
+    # sample site
+    sampleSite:
+        pattern: '/sample(|/)'
+        directory: sample
+
+    # Default site
+    site:
+        default: true

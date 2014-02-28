@@ -1,8 +1,7 @@
 <?php
-require_once('../vendor/autoload.php');
-
 define('HATHOORA_PROFILE_START_TIME', microtime());
 define('HATHOORA_ROOTPATH', realpath(__DIR__ . '/..') .'/');
+require_once('../vendor/autoload.php');
 
 // use prod environment by default
 $env = 'prod';

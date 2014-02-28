@@ -16,7 +16,7 @@
                 foreach($_arrNav as $navItem => $navName)
                 {
                     $_selected = isset($currentNav) && $currentNav == $navItem ? ' selected ' : null;
-                    echo '<li><a href="/docs/view/'. $navItem .'" class="'. $_selected  .'">'. $navName .'</a></li>';
+                    echo '<li><a href="/sample/docs/view/'. $navItem .'" class="'. $_selected  .'">'. $navName .'</a></li>';
                 }
                 echo '
                             </ul>

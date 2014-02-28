@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "> 5.2",
         "hathoora/core": "dev-master",
         "hathoora/grid": "dev-master"
     }
