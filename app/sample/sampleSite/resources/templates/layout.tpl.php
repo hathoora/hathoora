@@ -17,8 +17,9 @@
         blockquote:before, blockquote:after, q:before, q:after {	content: ''; content: none; }
         table { border-collapse: collapse; border-spacing: 0; }
 
-        body { background:#E9F4E4; font-size:12px; font-family: Arial; color:#333; }
+        body { background:#E9F4E4; font-size:14px; font-family: "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif; color:#333; }
         a, a:hover, a:visited { color:#006699; text-decoration: none; }
+        p {line-height:18px; }
         #container #header { display:block; margin:0 auto; width:auto; height:70px; background:#4A842D;
             -webkit-box-shadow: 0px 4px 3px rgba(50, 50, 50, 0.3);
             -moz-box-shadow:    0px 4px 3px rgba(50, 50, 50, 0.3);
@@ -47,17 +48,21 @@
             box-shadow: 0 0 3px #ccc;
         }
 
-        .nav ul > li { font-size:14px; font-weight: bold; }
+        .nav ul > li { font-weight: bold; }
         .nav ul li ul { margin-top:6px; margin-bottom: 20px; }
-        .nav ul li ul li { font-size:12px; font-weight: normal; margin-bottom:4px; }
+        .nav ul li ul li { font-weight: normal; margin-bottom:4px; }
         .nav ul li ul li a.selected { color:#4A842D; }
         .docs h1 { color:#4A842D; font-size:28px; margin-bottom:10px; font-weight: bold;}
-        .docs ul.outline { margin-bottom:40px; }
-        .docs ul.outline li { margin-bottom:4px; }
+        .docs ul { margin-left:40px; }
+        .docs ul li { margin-bottom:8px; list-style: disc; }
+        .docs ul li:last-child { margin-bottom:0px; }
+        .docs ul.outline { margin-left:0px; margin-bottom:40px; }
+        .docs ul.outline li { margin-bottom:6px; list-style: none;  }
         .docs h2 { color:#006699; font-size:22px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
-        #container #footer { width:980px; margin:0 auto; }
-        code.inline {
+         #container #footer { width:980px; margin:0 auto; }
+         code.inline {
             background-color: #F8F8F8;
+            color:#4A842D;
             border: 1px solid #DDDDDD;
             border-radius: 3px;
             display: inline-block;
@@ -195,9 +200,9 @@
     <div id="container">
         <div id="header">
             <div id="header_inner">
-                <h1><a href="http://hathoora.root.pk">Hathoora</a></h1>
+                <h1><a href="http://labs.pakeela.com/hathoora">Hathoora PHP Framework</a></h1>
                 <ul class="menu">
-                    <li><a href="https://github.com/attozk/hathoora">Download</a></li>
+                    <li><a href="https://github.com/pakeela/hathoora">Download</a></li>
                 </ul>
 
                 <!--

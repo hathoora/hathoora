@@ -10,7 +10,7 @@ RewriteRule "(^|/)\." - [F]
 RewriteRule \.(svn|git|hg|bzr|cvs)(/|$) - [F]
 
 # frontController
-RewriteCond %{REQUEST_URI} !^/media/ [NC]
+RewriteCond %{REQUEST_URI} !^/_assets/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule  .* index.php  [L,QSA]

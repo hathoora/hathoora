@@ -3,7 +3,7 @@
     <ul class="outline">
         <li><a href="#environment">Defining Environment</a></li>
         <li><a href="#application">Setting up Application(s)</a></li>
-        <li><a href="#configuration">Application Configuration</a></li>
+        <li><a href="#configuration">Application Source Configuration</a></li>
     </ul>
 
     <a name="environment"></a>
@@ -12,20 +12,31 @@
         To setup environment for your hathoora application you can use the following options:
     </p>
     <p>
-        1. Define <code class="inline">HATHOORA_ENV</code> in Apache. It can be defined in .htaccess of vhost configuration file.
+        1. Define <code class="inline">HATHOORA_ENV</code> in Apache using <a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html" target="_blank">SetEnv</a> directive. It can be defined in .htaccess of vhost configuration file.
     </p>
 
     <pre>
         <code class="hljs apache">
-            SetEnv HATHOORA_ENV prod
+            &lt;VirtualHost *:80&gt;
+                DocumentRoot /some/path/hathoora/docroot
+                ServerName mysite.com
+
+                SetEnv HATHOORA_ENV prod
+
+                &lt;Directory /some/path/hathoora/docroot&gt;
+                    AllowOverride All
+                &lt;/Directory&gt;
+            &lt;/VirtualHost&gt;
         </code>
     </pre>
 
     <p>
-        2. By defining <code class="inline">$env</code> variable in <code class="inline">index.php</code>
+        2. By defining <code class="inline">$env</code> variable in <code class="inline">HATHOORA_ROOTPATH/index.php</code>
     </p>
     <pre>
         <code class="hljs php">
+            # File: HATHOORA_ROOTPATH/index.php
+
             // use prod environment by default
             $env = 'prod';
 
@@ -43,25 +54,43 @@
     <a name="application"></a>
     <h2>Setting up Application(s)</h2>
     <p>
-        Hathoora Framrwork support mutiple applications (or websites). Applications are defined in <code class="inline">boot/config/app_ENV.yml</code>.
+        Hathoora Framrwork support mutiple applications (or websites). Applications are defined in <code class="inline">HATHOORA_ROOTPATH/boot/config/app_ENV.yml</code>.
+    </p>
+    <p>
+        You can define things like:
+    </p>
+    <ul>
+        <li>Multiple applications (or websites)</li>
+        <li>Multiple applications (or websites) for dev/prod/stag/etc.. environments</li>
+        <li>Regex pattern</li>
+        <li>Directory for code organization</li>
+        <li>Namespacing</li>
+        <li>Custom route dispatchers for advanced routing</li>
+    </ul>
+    <p>
+        Listed below are some example application configurations to give you an idea about various possibilites.
     </p>
 
+    <br/>
     <p>
         <b>Example 1:</b> If you have only one application then you can use something like the following:
     </p>
     <pre>
         <code class="hljs Ini">
+            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+
             app:
                 mySite:
                     default: true # will be used as default
         </code>
     </pre>
     <p>
-        In the preceding example, the source for your application will be located in <code class="inline">app/mySite</code>
+        In the preceding example, the source for your application will be located in <code class="inline">HATHOORA_ROOTPATH/app/mySite</code>
     </p>
 
+    <br/>
     <p>
-        <b>Example 2:</b> For supporting multiple applications:
+        <b>Example 2:</b> For supporting multiple applications like the following:
     </p>
     <ul>
         <li>http://www.website1.com</li>
@@ -69,6 +98,8 @@
     </ul>
     <pre>
         <code class="hljs Ini">
+            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+
             app:
                 website1:
                     pattern: '^www.website1.com(|/)'
@@ -85,13 +116,14 @@
     </p>
     <ul>
         <li>
-            http://www.website1.com -> <code class="inline">app/myCompany/website1</code>
+            http://www.website1.com -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website1</code>
         </li>
         <li>
-            http://www.website2.com -> <code class="inline">app/myCompany/website2</code>
+            http://www.website2.com -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website2</code>
         </li>
     </ul>
 
+    <br/>
     <p>
         <b>Example 3:</b> For supporting prod and dev enviornments:
     </p>
@@ -101,7 +133,7 @@
     </ul>
     <pre>
         <code class="hljs Ini">
-            #File: app_prod.yml
+            # File: HATHOORA_ROOTPATH/boot/config/app_prod.yml
             app:
                 mysite:
                     pattern: '^www.mysite.com(|/)'
@@ -109,7 +141,8 @@
                     directory: myCompany
 
 
-            #File: app_dev.yml
+
+            # File: HATHOORA_ROOTPATH/boot/config/app_dev.yml
             app:
                 mysite:
                     pattern: '^dev.mysite.com(|/)'
@@ -118,9 +151,9 @@
         </code>
     </pre>
 
-
+    <br/>
     <p>
-        <b>Example 4:</b> Seperation of code... If you wanted to have seperate code (for authentication/organization) between main website and admin panel.
+        <b>Example 4:</b> Seperation of code. If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
     </p>
     <ul>
         <li>http://www.mysite.com</li>
@@ -129,6 +162,8 @@
     </ul>
     <pre>
         <code class="hljs Ini">
+            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+
             app:
                 admin:
                     pattern: '^www.mysite.com/admin(|/)'
@@ -153,29 +188,31 @@
     </p>
     <ul>
         <li>
-            http://www.mysite.com -> <code class="inline">app/myCompany/site</code>
+            http://www.mysite.com -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/site</code>
         </li>
         <li>
-            http://www.mysite.com/admin -> <code class="inline">app/myCompany/admin</code>
+            http://www.mysite.com/admin -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/admin</code>
         </li>
         <li>
-            http://api.mysite.com -> <code class="inline">app/myApiDirectory/api</code>
+            http://api.mysite.com -> <code class="inline">HATHOORA_ROOTPATH/app/myApiDirectory/api</code>
         </li>
         <li>
-            NO URL, purely for organization -> <code class="inline">app/myApiDirectory/helper</code>
+            NO URL, purely for organization -> <code class="inline">HATHOORA_ROOTPATH/app/myApiDirectory/helper</code>
         </li>
     </ul>
 
     <a name="configuration"></a>
-    <h2>Application Configuration</h2>
+    <h2>Application Source Configuration</h2>
     <p>
-        Application configuration are located at <code class="inline">app/directory/namespace/config/config_ENV.yml</code> and can be nested.
+        Application source configuration are located at <code class="inline">HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml</code> and can be nested.
     </p>
     <p>
-        A complete list of configuration is shown below.
+        Sample configuration is shown below:
     </p>
     <pre>
-        <code class="hljs bash">
+        <code class="hljs Ini">
+            #file HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml
+
             # Import config which will be overwritten
             imports:
                 - { resource: config_gold.yml }
@@ -183,117 +220,42 @@
             # framework configurations..
             hathoora:
 
-                # experimental assets management
+                # assets management
                 gulaboo:
-                    # when enabled adds 'assets' service
                     assets:
                         enabled: 1
                         version: v1
-
                 translation:
-                    # when enabled adds 'translation' service
                     enabled: 1
-                    # adds debugging info to profiler
                     debug: 0
 
                 logger:
-
-                    # to profile various components of application (database, cache, template etc..)
                     profiling:
                         enabled: 0
-
                     logging:
                         enabled: 0
                         level: DEBUG
-
                     webprofiler:
-                        # to enable web profiller
                         enabled: 0
-                        # when profiler is enabled, it would be displayed only for the following content types
                         content_types: ['text/html']
-                        # don't show webprofile on ajax requests
                         skip_on_ajax: 1
-                        # skip web profiller for the following POST params
                         skip_on_post_params: []
-                        # skip web profiller for the following GET params
                         skip_on_get_params: []
 
                 template:
-                    # which template engine to use
                     engine:
                         name: Stuob # other option is Smarty
-
                     # when using smarty as the engine, using the following configurations
                     Smarty:
                         caching: 0
                         cache_lifetime: 0
-                        cache_dir: '/tmp/smarty/mspt/template_cache'
-                        compile_dir: '/tmp/smarty/mspt/templates_c'
-                        force_compile: 0
-                        compile_check: 1
-
+                        ....
 
                 database:
-                    # simple dsn
                     default: mysql://dbuser:dbpassword@dbhost:3306/dbname
                     db2: mysql://dbuser:dbpassword@dbhost:3306/dbname
 
-                    # Advanced configuration:
-                    # If you have multiple database servers for read/write then this might be a better options.
-                    dbPool1:
-
-                        # Failover logic: When a server becomes unavailable then following logics is applied:
-                        #       default logic:  In default logic
-                        #           Write: If master server is not reachable for write, then next writeable master (if any) will be used based on weight.
-                        #           Read: If slave server is not reachable for reads, the next slave (if any) will be used based on weight.
-                        #               1.  If there are no slave servers available then master read only server (if any) will be used based on weight.
-                        #               2.  If there is still no read only master server, then next master with allow_read (if any) will be used based on weight
-                        #       TODO custom logic: An array containing class and method to call. User can specify which db server to use.
-                        #           This gives user the flexibility to pick a db based on  db health, concurrent threads etc..
-                        #           Format is [\class, method]
-                        failover: default
-
-                        #list of servers in this pool
-                        servers:
-
-                            dbMaster1:
-                                dsn: mysql://dbuser:dbpassword@dbhost:3306/dbname
-
-                                # role - In advance db setup, there are two types of roles:
-                                #   master - used for write (and some occasions for read, keep reading)
-                                #   slave - used for read
-                                role: master
-
-                                # read_only - (default: false) 'readonly' mode would not allow any writes to specified server.  Read only
-                                # servers (masters) are usually passive in nature or hot stand by. In read only mode data is not written to
-                                # dsn and any query except for SELECT is ignored and result in empty result set
-                                read_only: false
-
-                                # allow_read -  (default: true) To allow reads from master when there is no slave and no read only master db
-                                # Note that you cannot use allow_read & rad_only for the master
-                                allow_read: true
-
-                                # weight - For the same roles a database with higher weight is picked first.
-                                weight: 1
-
-                                # on_connect - Any sql commands to run on connect
-                                on_connect:
-                                    - SET NAMES utf8;
-
-                            dbMaster2:
-                                dsn: mysql://dbuser:dbpassword@dbhost:3306/dbname
-                                role: master
-                                read_only: true
-                                weight: 2
-                                on_connect:
-                                    - SET NAMES utf8;
-                                    - /* Another SQL command */;
-
-                            dbSlave1:
-                                dsn: mysql://dbuser:dbpassword@dbhost:3306/dbname
-                                role: slave
-                                weight: 1
-
+                    # Advanced configuration also avaialble, see Databases for more information
 
                 # for hathoora cache service
                 cache:
@@ -333,7 +295,7 @@
                         setContainer: [ @container@ ]
                     type: static
 
-                # sample cache service for posts
+                # factory service
                 cache.posts:
                     factory_service: @cache@
                     factory_method: pool

@@ -11,8 +11,8 @@ class docsController extends controller
     public $arrNav = array(
         'Getting Started' => array(
             'installation' => 'Installation',
-            'configuration' => 'Configuration',
             'structure' => 'File Structure',
+            'configuration' => 'Configuration',
             'routing' => 'Routing & URLs',
             'controller' => 'Controller',
             'model' => 'Model',
@@ -39,7 +39,6 @@ class docsController extends controller
 
     public function view($currentNav)
     {
-        $currentNav = strtolower($currentNav);
         if (true)
         {
             $arrTplParams = array(
