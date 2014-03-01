@@ -1,8 +1,23 @@
 {
+    "name": "hathoora/grid",
+    "type": "library",
+    "description": "Hathoora PHP Framework",
+    "keywords": ["framework"],
+    "homepage": "http://labs.pakeela.com/hathoora",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Usman Malik",
+            "email": "attozk@khat.pk",
+            "homepage": "http://attozk.mine.pk"
+        }
+    ],
     "require": {
-        "php": "> 5.2",
+        "php": ">=5.3.0",
         "hathoora/core": "dev-master",
         "hathoora/grid": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {"hathoora\\": "src/"}
     }
 }
-
