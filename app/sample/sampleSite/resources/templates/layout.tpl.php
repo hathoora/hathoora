@@ -51,10 +51,10 @@
         .nav ul li ul { margin-top:6px; margin-bottom: 20px; }
         .nav ul li ul li { font-size:12px; font-weight: normal; margin-bottom:4px; }
         .nav ul li ul li a.selected { color:#4A842D; }
-        .docs h1 { color:#4A842D; font-size:24px; margin-bottom:10px; font-weight: bold;}
+        .docs h1 { color:#4A842D; font-size:28px; margin-bottom:10px; font-weight: bold;}
         .docs ul.outline { margin-bottom:40px; }
         .docs ul.outline li { margin-bottom:4px; }
-        .docs h2 { color:#006699; font-size:28px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
+        .docs h2 { color:#006699; font-size:22px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
         #container #footer { width:980px; margin:0 auto; }
         code.inline {
             background-color: #F8F8F8;
