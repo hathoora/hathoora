@@ -13,12 +13,21 @@ class docsController extends controller
             'installation' => 'Installation',
             'structure' => 'File Structure',
             'configuration' => 'Configuration',
-            'routing' => 'Routing & URLs',
+            'routing' => 'Routing & Pretty URLs',
             'controller' => 'Controller',
+            'view' => 'View & Templates',
+            'validation' => 'validation',
             'model' => 'Model',
         ),
         'Learning More' => array(
-            'database' => 'Database'
+            'lifecycle' => 'Request Lifecycle',
+            'database' => 'Database',
+            'grid' => 'Grid',
+            'cache' => 'Caching',
+            'container' => 'Container',
+            'services' => 'Services',
+            'listeners' => 'Listeners',
+            'translations' => 'Translations',
         )
     );
 

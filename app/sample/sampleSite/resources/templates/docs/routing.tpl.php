@@ -1,5 +1,5 @@
 <div class="box">
-    <h1>Routing & URLs</h1>
+    <h1>Routing & Pretty URLs</h1>
     <ul class="outline">
         <li>
             <a href="#defaultRouting">Default Routing</a>
@@ -9,7 +9,7 @@
                 <li><a href="#defaultController">Default Controller</a></li>
                 <li><a href="#defaultAction">Default Action</a></li>
                 <li><a href="#camelcase">Camel Case Action Names</a></li>
-                <li><a href="#uri">Few Words About URI</a></li>
+                <li><a href="#uri">Note About URI</a></li>
             </ul>
         </li>
         <li><a href="#advanced">Advanced Routing</a></li>
@@ -164,7 +164,7 @@
 
 
     <a name="uri"></a>
-    <h2>Few Words About URI</h2>
+    <h2>Note About URI</h2>
     <p>
         In above examples routing was based on URI, the part after the domain.
     </p>

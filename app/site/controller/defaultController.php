@@ -16,9 +16,8 @@ class defaultController extends controller
      */
     public function index()
     {
-        // redirect to documentation page
-        $response = $this->response();
-        $response->redirect('/sample/docs/', 302);
+        $template = $this->template('index.tpl.php');
+        $response = $this->response($template);
 
         return $response;
     }

@@ -31,7 +31,7 @@
     </pre>
 
     <p>
-        2. By defining <code class="inline">$env</code> variable in <code class="inline">HATHOORA_ROOTPATH/index.php</code>
+        2. Or by defining <code class="inline">$env</code> variable in <code class="inline">HATHOORA_ROOTPATH/index.php</code>
     </p>
     <pre>
         <code class="hljs php">
@@ -50,6 +50,9 @@
         </code>
     </pre>
 
+    <p>
+        Environment value is then stored as constant that you may use in your code <code class="inline">HATHOORA_ENV</code>
+    </p>
 
     <a name="application"></a>
     <h2>Setting up Application(s)</h2>
@@ -80,7 +83,7 @@
             # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
 
             app:
-                mySite:
+                mySite:    <-- name of app
                     default: true # will be used as default
         </code>
     </pre>
@@ -101,12 +104,12 @@
             # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
 
             app:
-                website1:
+                website1:   <-- name of app
                     pattern: '^www.website1.com(|/)'
                     default: true # will be used as default
                     directory: myCompany
 
-                website2:
+                website2:   <-- name of app
                     pattern: '^www.website2.com(|/)'
                     directory: myCompany
         </code>

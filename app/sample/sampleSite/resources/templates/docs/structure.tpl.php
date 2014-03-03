@@ -45,7 +45,7 @@
             # File structure of an app - HATHOORA_ROOTPATH/app
 
             app/
-                myNameSpace/
+                myNameSpace/    <-- also the name of app
                     config/
                     controller/
                     resources/
