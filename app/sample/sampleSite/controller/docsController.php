@@ -16,7 +16,7 @@ class docsController extends controller
             'routing' => 'Routing & Pretty URLs',
             'controller' => 'Controller',
             'view' => 'View & Templates',
-            'validation' => 'validation',
+            'validation' => 'Validation',
             'model' => 'Model',
         ),
         'Learning More' => array(

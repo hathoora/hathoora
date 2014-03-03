@@ -9,6 +9,7 @@
                 <li><a href="#tplVars">Global Template Variables</a></li>
                 <li><a href="#base">Base Controllers</a></li>
                 <li><a href="#globals">Accessing Globals (GET, POST, SERVER, SESSION, COOKIE etc.)</a></li>
+                <li><a href="#container">Accessing Container</a></li>
                 <li><a href="#customHeaders">Sending Custom Headers In Response</a></li>
                 <li><a href="#redirects">Redirects and Flash Messages</a></li>
             </ul>
@@ -264,6 +265,82 @@
     <p>
         Click <a href="https://github.com/Pakeela/hathoora-core/blob/master/src/hathoora/http/request.php" target="_blank">here</a> to view complete list of functions avaialble in request object.
     </p>
+
+    <a name="container"></a>
+    <h2>Accessing Container</h2>
+        If your contoller is extending <code class="inline">hathoora/container/*</code> then you have access to <a href="/sample/docs/container">container</a> within the scope of controller.
+    </p>
+    <pre>
+        <code class="hljs php">
+            # File HATHOORA_ROOTPATH/app/appNAME/controller/blogController.php
+
+            namespace appNAME\controller;
+            use hathoora\controller\controller;
+
+            /**
+             * blog controller
+             */
+            class blogController extends controller
+            {
+                public function list()
+                {
+                    // check for GET param
+                    $q = $this->getRequest()->getParam('q');
+
+                    // get current application path
+                    $this->getRouteRequest()->getAppDirectory();
+
+                    // check for configuration
+                    $this->getConfig('myconfigName');
+
+                    // setting a config
+                    $this->setConfig('myconfigName', 'value1');
+
+                    // Hathoora PHP Framework version
+                    $this->getKernel()->getKernel();
+
+                    ...
+                }
+            }
+        </code>
+    </pre>
+    <p>
+        If you are using <a href="#barebone">barebone controller</a>, the you can access container by doing something like the following:
+    </p>
+  <pre>
+        <code class="hljs php">
+            # File HATHOORA_ROOTPATH/app/appNAME/controller/blogController.php
+
+            namespace appNAME\controller;
+            use hathoora\container;
+
+            /**
+             * blog controller
+             */
+            class blogController
+            {
+                public function list()
+                {
+                    // check for GET param
+                    $q = container::getRequest()->getParam('q');
+
+                    // get current application path
+                    container::getRouteRequest()->getAppDirectory();
+
+                    // check for configuration
+                    container::getConfig('myconfigName');
+
+                    // setting a config
+                    container::setConfig('myconfigName', 'value1');
+
+                    // Hathoora PHP Framework version
+                    container::getKernel()->getKernel();
+
+                    ...
+                }
+            }
+        </code>
+    </pre>
 
     <a name="customHeaders"></a>
     <h2>Sending Custom Headers In Response</h2>

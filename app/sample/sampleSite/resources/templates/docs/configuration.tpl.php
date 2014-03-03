@@ -3,6 +3,12 @@
     <ul class="outline">
         <li><a href="#environment">Defining Environment</a></li>
         <li><a href="#application">Setting up Application(s)</a></li>
+        <ul>
+            <li><a href="#application-simple">Simple Application</a></li>
+            <li><a href="#application-multiple">Multiple Application</a></li>
+            <li><a href="#application-environments">Multiple Environments</a></li>
+            <li><a href="#application-organization">Code Organization</a></li>
+        </ul>
         <li><a href="#configuration">Application Source Configuration</a></li>
     </ul>
 
@@ -76,6 +82,7 @@
 
     <br/>
     <p>
+        <a name="#application-simple"></a>
         <b>Example 1:</b> If you have only one application then you can use something like the following:
     </p>
     <pre>
@@ -93,6 +100,7 @@
 
     <br/>
     <p>
+        <a name="#application-multiple"></a>
         <b>Example 2:</b> For supporting multiple applications like the following:
     </p>
     <ul>
@@ -128,6 +136,7 @@
 
     <br/>
     <p>
+        <a name="#application-environments"></a>
         <b>Example 3:</b> For supporting prod and dev enviornments:
     </p>
     <ul>
@@ -156,6 +165,7 @@
 
     <br/>
     <p>
+        <a name="#application-organization"></a>
         <b>Example 4:</b> Seperation of code. If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
     </p>
     <ul>

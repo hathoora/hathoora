@@ -6,18 +6,20 @@
         "source": {
             "type": "git",
             "url": "https://github.com/attozk/hathoora-core.git",
-            "reference": "2ac2b995443cc6077baaaa1a20bd364a2be5da11"
+            "reference": "dbcbc4cb574af19c12ff9d10daa72f7dbef6ffa0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/attozk/hathoora-core/zipball/2ac2b995443cc6077baaaa1a20bd364a2be5da11",
-            "reference": "2ac2b995443cc6077baaaa1a20bd364a2be5da11",
+            "url": "https://api.github.com/repos/attozk/hathoora-core/zipball/dbcbc4cb574af19c12ff9d10daa72f7dbef6ffa0",
+            "reference": "dbcbc4cb574af19c12ff9d10daa72f7dbef6ffa0",
             "shasum": ""
         },
         "require": {
+            "ext-mbstring": "*",
+            "ext-mysqli": "*",
             "php": ">=5.3.0"
         },
-        "time": "2013-08-18 03:47:53",
+        "time": "2014-02-28 06:05:01",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -49,18 +51,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/attozk/hathoora-grid.git",
-            "reference": "ea95ed6ea931be987384ce30d51f244c1a2b0f84"
+            "reference": "a14a3772dad698b8f70598cd35f83a8f37bc9c66"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/attozk/hathoora-grid/zipball/ea95ed6ea931be987384ce30d51f244c1a2b0f84",
-            "reference": "ea95ed6ea931be987384ce30d51f244c1a2b0f84",
+            "url": "https://api.github.com/repos/attozk/hathoora-grid/zipball/a14a3772dad698b8f70598cd35f83a8f37bc9c66",
+            "reference": "a14a3772dad698b8f70598cd35f83a8f37bc9c66",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2013-08-18 17:05:20",
+        "time": "2014-02-08 04:25:54",
         "type": "library",
         "installation-source": "source",
         "autoload": {

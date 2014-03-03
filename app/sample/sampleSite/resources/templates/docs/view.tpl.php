@@ -6,13 +6,21 @@
         <li>
             <ul>
                 <li><a href="#anywhere">Templatize From Anywhere</a></li>
+                <li><a href="#apps">Using Templates From Other Apps</a></li>
             </ul>
         </li>
         <li><a href="#engines">Template Engines</a></li>
         <ul>
             <li><a href="#stuob">Stuob (Default template engine)</a></li>
+            <ul>
+                <li><a href="#stuob-configuration">Configuration</a></li>
+                <li><a href="#stuob-caching">Caching</a></li>
+                <li><a href="#stuob-extending">Extending Templates</a></li>
+                <li><a href="#stuob-include">Including Templates</a></li>
+                <li><a href="#stuob-controller">Rendering A Controller</a></li>
+                <li><a href="#stuob-container">Accessing Container</a></li>
+            </ul>
             <li><a href="#smarty">Smarty</a></li>
-            <li><a href="#custom">Roll Your Own</a></li>
         </ul>
     </ul>
 
@@ -148,4 +156,287 @@
             &lt;/table&gt;
         </code>
     </pre>
+
+    <a name="apps"></a>
+    <h2>Using Templates From Other Apps</h2>
+    <p>
+        If you have <a href="/sample/docs/configuation#application-multiple">multiple applications</a> then you can use templates from one application into another. Consider the following example:
+    </p>
+    <pre>
+        <code class="hljs php">
+            # File HATHOORA_ROOTPATH/app/appNAME/controller/defaultController.php
+
+            namespace site\controller;
+            use hathoora\controller\controller;
+
+            /**
+             * Default controller
+             */
+            class defaultController extends controller
+            {
+                /**
+                 * Homepage action
+                 */
+                public function index()
+                {
+                    // assign variables to template
+                    $arrTplVars = array(
+                        'title' => 'My Website',
+                        'date' => date('m/d/y')
+                    );
+
+                    // full path of other app
+                    $route = $this->getRouteRequest('otherAPPName');
+                    $appPath = $route->getAppDirectory() . '/resources/templates/';
+                    $templatePath = $appPath . 'layout.tpl.php';
+
+                    $template = $this->template($templatePath, $arrTplVars);
+                    $response = $this->response($template);
+
+                    return $response;
+                }
+            }
+        </code>
+    </pre>
+
+
+    <a name="engines"></a>
+    <h2>Template Engines</h2>
+    <p>
+        You have the ability to choose which template engine to use. The default enging is <a href="#Stuob">Stuob</a>. Template engine is <a href="/sample/docs/view/configuration#configuration"defined per application</a> like following:
+    </p>
+    <pre>
+        <code class="hljs Ini">
+            # File HATHOORA_ROOTPATH/app/appNAME/config/config_ENV.yml
+
+            # framework configurations..
+            hathoora:
+                ...
+                template:
+                    engine:
+                        name: Stuob
+                ...
+        </code>
+    </pre>
+
+
+    <a name="#stuob"></a>
+    <h2>Stuob (Default template engine)</h2>
+    <p>
+        Stuob is the default template engine which is plain PHP inside templates.
+    </p>
+    <br/>
+    <p>
+        <a name="stuob-configuration"></a>
+        <b>Configuration</b><br/>
+        Following demonstrate how to configure Stuob per application.
+    </p>
+    <pre>
+        <code class="hljs Ini">
+            # File HATHOORA_ROOTPATH/app/appNAME/config/config_ENV.yml
+
+            # framework configurations..
+            hathoora:
+                ...
+                template:
+                    engine:
+                        name: Stuob
+                    Stuob:
+                        caching: 0|1
+                        cache_dir:  writeable absoulte path to where cache content is stored
+                        cache_lifetime: INT in seconds, how long to cache for
+                ...
+        </code>
+    </pre>
+
+    <p>
+        <a name="stuob-caching"></a>
+        <b>Caching</b><br/>
+        In addition to above configurations, you can also define Stuob caching parameters as shown below in this cache example.
+    </p>
+    <pre>
+        <code class="hljs php">
+            $arrTplVars = array(
+                'name' => 'Hathoora'
+            );
+            $template = \hathoora\template\template('cacheTemplate.tpl.php', $arrTplVars);
+            $template->setCacheDir('/tmp/cache');
+            $template->setCacheId(8171);
+            $template->setCacheTime(60);
+            $template->setCaching(true);
+
+            if ($template->isCached())
+            {
+                //echo "File is cached ";
+            }
+            else
+            {
+                // do heavy duty stuff
+                $data = ...
+
+                $template->assign('moreVars', $data);
+            }
+
+            $html = $template->fetch();
+        </code>
+    </pre>
+
+    <p>
+        <a name="stuob-extending"></a>
+        <b>Extending Templates</b><br/>
+        Templates can be extended using <code class="inline">block()</code>, <code class="inline">start()</code>, <code class="inline">end()</code> and <code class="inline">extend()</code> functions as demonstrated in the following example.
+    </p>
+    <pre>
+        <code class="hljs html">
+            # File layout.tpl.php
+
+            &lt;!doctype html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;title&gt;
+                    &lt;?php
+                        $this-&gt;block('metaTitle');
+                    ?&gt;
+                &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body class=&quot; &quot;&gt;
+                &lt;div id=&quot;container&quot;&gt;
+                    &lt;div id=&quot;body&quot;&gt;
+                        &lt;?php
+                            $this-&gt;block('body');
+                        ?&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;footer&quot;&gt; &lt;/div&gt;
+                 &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+
+
+            # File children.tpl.php
+
+            &lt;?php
+            $this-&gt;start('metaTitle');
+                echo 'Website Title';
+            $this-&gt;end('body');
+
+            $this-&gt;start('body');
+                echo '&lt;div&gt;Body&lt;/div&gt;';
+            $this-&gt;end('body');
+
+            $this-&gt;extend('layout.tpl.php');
+        </code>
+    </pre>
+
+    <p>
+        Above would produce the following:
+    </p>
+    <pre>
+        <code class="hljs html">
+            &lt;!doctype html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;title&gt;
+                    Website Title
+                &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body class=&quot; &quot;&gt;
+                &lt;div id=&quot;container&quot;&gt;
+                    &lt;div id=&quot;body&quot;&gt;
+                        &lt;div&gt;Body&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;footer&quot;&gt; &lt;/div&gt;
+                 &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </code>
+    </pre>
+
+
+    <p>
+        <a name="stuob-include"></a>
+        <b>Including Templates</b><br/>
+        Use <code class="inline">load($file, $tplVars)</code> to include a template into another.
+    </p>
+    <br/>
+
+    <p>
+        <a name="stuob-controller"></a>
+        <b>Rendering A Controller</b><br/>
+        To render a controller from template using <code class="inline">render($arrController, $args)</code> as demonstrated in the following example.
+    </p>
+    <pre>
+        <code class="hljs html">
+            # File layout.tpl.php
+
+            &lt;!doctype html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;title&gt;
+                    &lt;?php
+                        $this-&gt;block('metaTitle');
+                    ?&gt;
+                &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body class=&quot; &quot;&gt;
+                &lt;div id=&quot;userBar&quot;&gt;
+                    &lt;?php $this->render(array(
+                                                    '\myNameSpace\controller\structureController', // class name
+                                                    'topBar'    // action (method) name
+                                                ),
+                                                array('param2', 'param2') // arguments to pass to method
+                                            );
+                    ?&gt;
+                &lt;/div&gt;
+                &lt;div id=&quot;container&quot;&gt;
+                    &lt;div id=&quot;body&quot;&gt;
+                        &lt;?php
+                            $this-&gt;block('body');
+                        ?&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;footer&quot;&gt; &lt;/div&gt;
+                 &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </code>
+    </pre>
+
+    <p>
+        <a name="stuob-container"></a>
+        <b>Accessing Container</b><br/>
+        By default you have access to <a href="/sample/docs/container">container</a> within the scope of template. Consider the following demonstration.
+    </p>
+    <pre>
+        <code class="hljs php">
+            # File layout.tpl.php
+
+            ...
+
+            // check for GET param
+            $q = $this->getRequest()->getParam('q');
+
+            // get current application path
+            $this->getRouteRequest()->getAppDirectory();
+
+            // check for configuration
+            $this->getConfig('myconfigName');
+
+            // setting a config
+            $this->setConfig('myconfigName', 'value1');
+
+            // Hathoora PHP Framework version
+            $this->getKernel()->getKernel();
+
+            ...
+        </code>
+    </pre>
+
+    <a name="smarty"></a>
+    <h2>Smarty</h2>
+    <p>
+        To be documented...
+    </p>
+
 </div>

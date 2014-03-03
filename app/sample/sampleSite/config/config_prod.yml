@@ -1,7 +1,8 @@
 # configuration file for 'prod' environment
 hathoora:
     logger:
-        profiling: 1
+        profiling:
+            enabled: 1
         logging:
             enabled: 1
             level: DEBUG
