@@ -107,6 +107,6 @@
     <br/>
     <br/>
     <p>
-        At this point you should be able to visit <a href="">http://localhost to view Hathoora PHP Framework sample apps.
+        At this point you should be able to visit <a href="">http://localhost</a> to view Hathoora PHP Framework sample apps.
     </p>
 </div>

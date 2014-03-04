@@ -13,6 +13,10 @@
             </ul>
         </li>
         <li><a href="#advanced">Advanced Routing</a></li>
+        <ul>
+            <li><a href="#dispatcher">Custom Dispatcher</a></li>
+            <li><a href="#httpd">Apache (or other web servers) Rewrites</a></li>
+        </ul>
     </ul>
 
     <a name="defaultRouting"></a>
@@ -196,11 +200,17 @@
 
 
 
-    <a name="advanced"></a>
     <h2>Advanced Routing</h2>
     <p>
-        If default routing is not what you are looking for, then consider custom route dispatchers. Custom router dispatchers are defined per application souce in <code class="inline">HATHOORA_ROOTPATH/boot/config/app.yml</code> configuration.
+        If default routing is not what you are looking for, then you have two more options for complex routing.
     </p>
+
+    <a name="dispatcher"></a>
+    <h2>Custom Dispatcher</h2>
+    <p>
+        Custom dispatchers is a PHP class and are defined per application souce in <code class="inline">HATHOORA_ROOTPATH/boot/config/app.yml</code> configuration.
+    </p>
+
     <pre>
         <code class="hljs Ini">
             # File HATHOORA_ROOTPATH/boot/config/app.yml
@@ -283,4 +293,36 @@
             }
         </code>
     </pre>
+
+
+    <a name="httpd"></a>
+    <h2>Apache (or other web servers) Rewrites</h2>
+    <p>
+        You can also use Apache rewrite for routing URLs. You would need to set the following params in Apache:
+    </p>
+    <ul>
+        <li>REDIRECT_HTRO</li>
+        <li>REDIRECT_HTRO_CONTROLLER</li>
+        <li>REDIRECT_HTRO_ACTION</li>
+        <li>REDIRECT_HTRO_PARAMS</li>
+    </ul>
+
+    <p>
+        The following example routes a URL <code class="inline">http://mysite.com/posts/1-hello-world</code> to <code class="inline">postsController::view($id, $slug)</code>.
+    </p>
+    <pre>
+        <code class="hljs php">
+            # File: docroot/.htaccess
+
+            RewriteEngine On
+
+            # Fancy URL for viewing a post on domains
+            RewriteCond %{HTTP_HOST} ^mysite.com [NC]
+            RewriteCond %{REQUEST_URI} ((.+?)|)/posts/(\d+)(-\/?(.+?))$ [NC]
+            RewriteRule .* index.php  [E=HTRO:1,E=HTRO_CONTROLLER:postsController,E=HTRO_ACTION:view,E=HTRO_PARAMS[0]:%3,E=HTRO_PARAMS[1]:%5,E=HTRO_PARAMS[2]:%2,L,QSA]
+        </code>
+    </pre>
+    <p>
+        At this moment, it is not possible to set appname using this method.
+    </p>
 </div>

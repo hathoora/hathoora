@@ -224,7 +224,7 @@
     </p>
     <pre>
         <code class="hljs Ini">
-            #file HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml
+            # File HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml
 
             # Import config which will be overwritten
             imports:

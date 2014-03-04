@@ -60,6 +60,7 @@
         .docs ul.outline li { margin-bottom:6px; list-style: none;  }
         .docs h2 { color:#006699; font-size:22px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
          #container #footer { width:980px; margin:0 auto; }
+         code.hljs { overflow:auto; }
          code.inline {
             background-color: #F8F8F8;
             color:#4A842D;
