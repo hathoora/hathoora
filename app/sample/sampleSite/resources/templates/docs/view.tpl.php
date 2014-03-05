@@ -160,7 +160,7 @@
     <a name="apps"></a>
     <h2>Using Templates From Other Apps</h2>
     <p>
-        If you have <a href="/sample/docs/configuation#applicationmultiple">multiple applications</a> then you can use templates from one application into another. Consider the following example:
+        If you have <a href="/sample/docs/view/configuation#applicationmultiple">multiple applications</a> then you can use templates from one application into another. Consider the following example:
     </p>
     <pre>
         <code class="hljs php">
@@ -408,7 +408,7 @@
     <p>
         <a name="stuob-container"></a>
         <b>Accessing Container</b><br/>
-        By default you have access to <a href="/sample/docs/container">container</a> within the scope of template. Consider the following demonstration.
+        By default you have access to <a href="/sample/docs/view/container">container</a> within the scope of template. Consider the following demonstration.
     </p>
     <pre>
         <code class="hljs php">

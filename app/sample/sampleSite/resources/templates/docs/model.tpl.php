@@ -1,8 +1,9 @@
 <div class="box">
     <h1>Model</h1>
     <ul class="outline">
-        <li><a href="#Basics">Basics</a></li>
+        <li><a href="#basics">Basics</a></li>
         <li><a href="#modelSAR">Model SAR (Simple Active Records)</a></li>
+        <li><a href="#cntr">Accessing Container</a></li>
     </ul>
 
     <a name="basics"></a>
@@ -12,6 +13,9 @@
     </p>
     <p>
         Model class gives you the freedom to implement your business logic in anyway you want.
+    </p>
+    <p>
+
     </p>
     <p>
         A sample model class is shown below in which we are extending <code class="inline">hathoora\model\model</code> class.
@@ -173,7 +177,7 @@
         </code>
     </pre>
     <p>
-        <a name="#modelSAR_new"></a>
+        <a name="modelSAR_new"></a>
         <b>New Record:</b> For storing a new record, you can do something like the following:
     </p>
     <pre>
@@ -182,6 +186,13 @@
             $note->user_id = 1;
             $note->title = 'Some title';
             $note->content = 'This is the content.';
+
+            // or you can also do
+            $note  = new \appNAME\model\note(array(
+                'user_id' => 1,
+                'title' => 'Some title',
+                'content' => 'This is the content.'
+            ));
 
             $arrError = note->validate();
 
@@ -192,7 +203,7 @@
         </code>
     </pre>
     <p>
-        <a name="#modelSAR_new"></a>
+        <a name="modelSAR_fetch"></a>
         <b>Fetch Record:</b> For fetching record, you can do something like the following:
     </p>
     <pre>
@@ -214,7 +225,7 @@
     </p>
     <br/>
     <p>
-        <a name="#modelSAR_new"></a>
+        <a name="modelSAR_delete"></a>
         <b>Delete Record:</b> For deleting a record, you can do something like the following:
     </p>
     <pre>
@@ -232,4 +243,9 @@
             $note->delete();
         </code>
     </pre>
+
+    <h2>Accessing Container</h2>
+    <a name="cntr"></a>
+        By extending <code class="inline">hathoora/model/*</code> you have access to <a href="/sample/docs/view/container">container</a>.
+    </p>
 </div>

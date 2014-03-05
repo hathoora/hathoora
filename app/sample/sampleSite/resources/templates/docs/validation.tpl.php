@@ -345,7 +345,7 @@
     <a name="modelSAR"></a>
     <h2>Validation For ModelSAR Class</h2>
     <p>
-        If you are using a <a href="/sample/docs/model#modelSAR">ModelSAR class</a>, then same rules apply at above, however you have the convineance of passing an object instead of array of values.
+        If you are using a <a href="/sample/docs/view/model#modelSAR">ModelSAR class</a>, then same rules apply at above, however you have the convineance of passing an object instead of array of values.
     </p>
 
     <pre>

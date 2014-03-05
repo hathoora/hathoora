@@ -24,11 +24,11 @@ class docsController extends controller
             'model' => 'Model',
         ),
         'Learning More' => array(
+            'container' => 'Container',
+            'services' => 'Services',
             'database' => 'Database',
             'grid' => 'Grid',
             'cache' => 'Caching',
-            'container' => 'Container',
-            'services' => 'Services',
             'listeners' => 'Listeners',
             'translations' => 'Translations',
         )

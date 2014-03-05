@@ -173,7 +173,7 @@
         In above examples routing was based on URI, the part after the domain.
     </p>
     <p>
-        However Hathoora PHP Frameworks allows you to change the domain identifier (using <a class="e" href="/sample/docs/configuration#applicationmultiple">regex patterns</a>) which would change the meaning of URI.</p>
+        However Hathoora PHP Frameworks allows you to change the domain identifier (using <a class="e" href="/sample/docs/view/configuration#applicationmultiple">regex patterns</a>) which would change the meaning of URI.</p>
     <p>
         To iterate over this point consider the following application specific configuration.
     </p>

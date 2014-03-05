@@ -82,7 +82,7 @@
 
     <br/>
     <p>
-        <a name="#applicationsimple"></a>
+        <a name="applicationsimple"></a>
         <b>Example 1:</b> If you have only one application then you can use something like the following:
     </p>
     <pre>
@@ -100,7 +100,7 @@
 
     <br/>
     <p>
-        <a name="#applicationmultiple"></a>
+        <a name="applicationmultiple"></a>
         <b>Example 2:</b> For supporting multiple applications like the following:
     </p>
     <ul>
@@ -143,7 +143,7 @@
 
     <br/>
     <p>
-        <a name="#applicationenvironments"></a>
+        <a name="applicationenvironments"></a>
         <b>Example 3:</b> For loading different configurations for dev & prod environments, like the following.
     </p>
     <ul>
@@ -172,8 +172,8 @@
 
     <br/>
     <p>
-        <a name="#applicationorganization"></a>
-        <b>Example 4:</b> Seperation of code - If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
+        <a name="applicationorganization"></a>
+        <b>Example 4:</b> Code organization - If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
     </p>
     <ul>
         <li>http://www.mysite.com</li>
