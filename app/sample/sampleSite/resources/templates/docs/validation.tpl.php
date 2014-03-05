@@ -164,7 +164,7 @@
     </p>
     <pre>
         <code class="hljs Ini">
-            # File HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml
+            # File HATHOORA_ROOTPATH/app/directory/namespace/config/config_HATHOORA_ENV.yml
 
             hathoora:
                 validation:

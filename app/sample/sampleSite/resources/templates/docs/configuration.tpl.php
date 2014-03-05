@@ -2,23 +2,23 @@
     <h1>Configuration</h1>
     <ul class="outline">
         <li><a href="#environment">Defining Environment</a></li>
-        <li><a href="#application">Setting up Application(s)</a></li>
+        <li><a href="#application">Supporting Application(s)</a></li>
         <ul>
-            <li><a href="#application-simple">Simple Application</a></li>
-            <li><a href="#application-multiple">Multiple Application</a></li>
-            <li><a href="#application-environments">Multiple Environments</a></li>
-            <li><a href="#application-organization">Code Organization</a></li>
+            <li><a href="#applicationsimple">Simple Application</a></li>
+            <li><a href="#applicationmultiple">Multiple Application</a></li>
+            <li><a href="#applicationenvironments">Multiple Environments</a></li>
+            <li><a href="#applicationorganization">Code Organization</a></li>
         </ul>
-        <li><a href="#configuration">Application Source Configuration</a></li>
+        <li><a href="#configuration">Application Specific Configuration</a></li>
     </ul>
 
     <a name="environment"></a>
     <h2>Defining Environment</h2>
     <p>
-        To setup environment for your hathoora application you can use the following options:
+        To setup environment for Hathoora PHP Framework installation you can use the following options:
     </p>
     <p>
-        1. Define <code class="inline">HATHOORA_ENV</code> in Apache using <a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html" target="_blank">SetEnv</a> directive. It can be defined in .htaccess of vhost configuration file.
+        1. Define <code class="inline">HATHOORA_ENV</code> in Apache using <a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html" target="_blank">SetEnv</a> directive. It can be defined in vhost configuration file as shown below.
     </p>
 
     <pre>
@@ -37,7 +37,7 @@
     </pre>
 
     <p>
-        2. Or by defining <code class="inline">$env</code> variable in <code class="inline">HATHOORA_ROOTPATH/index.php</code>
+        2. By defining <code class="inline">$env</code> variable in <code class="inline">HATHOORA_ROOTPATH/index.php</code> as shown below.
     </p>
     <pre>
         <code class="hljs php">
@@ -57,37 +57,37 @@
     </pre>
 
     <p>
-        Environment value is then stored as constant that you may use in your code <code class="inline">HATHOORA_ENV</code>
+        Environment value is then stored as constant <code class="inline">HATHOORA_ENV</code> that you may use in your code.
     </p>
 
     <a name="application"></a>
-    <h2>Setting up Application(s)</h2>
+    <h2>Supporting Application(s)</h2>
     <p>
-        Hathoora Framrwork support mutiple applications (or websites). Applications are defined in <code class="inline">HATHOORA_ROOTPATH/boot/config/app_ENV.yml</code>.
+        Hathoora PHP Framrwork support mutiple applications (or websites). Applications are defined in <code class="inline">HATHOORA_ROOTPATH/boot/config/app_HATHOORA_ENV.yml</code>.
     </p>
     <p>
         You can define things like:
     </p>
     <ul>
         <li>Multiple applications (or websites)</li>
-        <li>Multiple applications (or websites) for dev/prod/stag/etc.. environments</li>
+        <li>Multiple applications (or websites) for dev/prod/stag/etc environments</li>
         <li>Regex pattern</li>
         <li>Directory for code organization</li>
         <li>Namespacing</li>
         <li>Custom route dispatchers for advanced routing</li>
     </ul>
     <p>
-        Listed below are some example application configurations to give you an idea about various possibilites.
+        Listed below are some various possibilites of supporting applications.
     </p>
 
     <br/>
     <p>
-        <a name="#application-simple"></a>
+        <a name="#applicationsimple"></a>
         <b>Example 1:</b> If you have only one application then you can use something like the following:
     </p>
     <pre>
         <code class="hljs Ini">
-            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+            # File: HATHOORA_ROOTPATH/boot/config/app_HATHOORA_ENV.yml
 
             app:
                 mySite:    <-- name of app
@@ -95,12 +95,12 @@
         </code>
     </pre>
     <p>
-        In the preceding example, the source for your application will be located in <code class="inline">HATHOORA_ROOTPATH/app/mySite</code>
+        In this example the source for your application will be located in <code class="inline">HATHOORA_ROOTPATH/app/mySite</code>
     </p>
 
     <br/>
     <p>
-        <a name="#application-multiple"></a>
+        <a name="#applicationmultiple"></a>
         <b>Example 2:</b> For supporting multiple applications like the following:
     </p>
     <ul>
@@ -109,35 +109,42 @@
     </ul>
     <pre>
         <code class="hljs Ini">
-            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+            # File: HATHOORA_ROOTPATH/boot/config/app_HATHOORA_ENV.yml
 
             app:
-                website1:   <-- name of app
+                website1:
                     pattern: '^www.website1.com(|/)'
-                    default: true # will be used as default
+                    default: true
                     directory: myCompany
 
-                website2:   <-- name of app
+                website2:
                     pattern: '^www.website2.com(|/)'
                     directory: myCompany
         </code>
     </pre>
     <p>
-        In the preceding example, the source will be located as following:
+        In this example URL pattern with be checked as following:
+    <p>
+    <ul>
+        <li>a URL matching pattern <code class="inline">^www.website1.com(|/)</code> will be processed by <code class="inline">website1</code>'s  controller.</li>
+        <li>a URL matching pattern <code class="inline">^www.website2.com(|/)</code> will be processed by <code class="inline">website2</code>'s controller.</li>
+    </ul>
+    <p>
+        And soruce of applications would be locacted in:
     </p>
     <ul>
         <li>
-            http://www.website1.com -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website1</code>
+            website1 -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website1</code>
         </li>
         <li>
-            http://www.website2.com -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website2</code>
+            website2 -> <code class="inline">HATHOORA_ROOTPATH/app/myCompany/website2</code>
         </li>
     </ul>
 
     <br/>
     <p>
-        <a name="#application-environments"></a>
-        <b>Example 3:</b> For supporting prod and dev enviornments:
+        <a name="#applicationenvironments"></a>
+        <b>Example 3:</b> For loading different configurations for dev & prod environments, like the following.
     </p>
     <ul>
         <li>http://dev.mysite.com</li>
@@ -165,17 +172,20 @@
 
     <br/>
     <p>
-        <a name="#application-organization"></a>
-        <b>Example 4:</b> Seperation of code. If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
+        <a name="#applicationorganization"></a>
+        <b>Example 4:</b> Seperation of code - If you wanted to have seperate code (for authentication/organization) between main website and admin panel in a scenario like the following:
     </p>
     <ul>
         <li>http://www.mysite.com</li>
         <li>http://www.mysite.com/admin</li>
         <li>http://api.mysite.com</li>
     </ul>
+    <p>
+        Then you can use a configuration like this.
+    </p>
     <pre>
         <code class="hljs Ini">
-            # File: HATHOORA_ROOTPATH/boot/config/app_ENV.yml
+            # File: HATHOORA_ROOTPATH/boot/config/app_HATHOORA_ENV.yml
 
             app:
                 admin:
@@ -197,7 +207,7 @@
         </code>
     </pre>
     <p>
-        In the preceding example, order matters - first hit. Code for your application will be located as following:
+        In this example order matters - first hit. Code for your application will be located as following:
     </p>
     <ul>
         <li>
@@ -215,16 +225,19 @@
     </ul>
 
     <a name="configuration"></a>
-    <h2>Application Source Configuration</h2>
+    <h2>Application Specific Configuration</h2>
     <p>
-        Application source configuration are located at <code class="inline">HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml</code> and can be nested.
+        Hathoora PHP Framework supports multiple applications and each application will have its own configuration specific to it needs.
     </p>
     <p>
-        Sample configuration is shown below:
+        These configurations are located at <code class="inline">HATHOORA_ROOTPATH/app/directory/namespace/config/config_HATHOORA_ENV.yml</code> and can be nested.
+    </p>
+    <p>
+        A sample configuration is shown below:
     </p>
     <pre>
         <code class="hljs Ini">
-            # File HATHOORA_ROOTPATH/app/directory/namespace/config/config_ENV.yml
+            # File HATHOORA_ROOTPATH/app/directory/namespace/config/config_HATHOORA_ENV.yml
 
             # Import config which will be overwritten
             imports:
@@ -326,6 +339,19 @@
                     listener2:
                         class: \namespace\class
                         method: functionToPassTo
+            ...
         </code>
     </pre>
+    <p>
+        Application configuration has basically following main parts:
+    </p>
+    <ul>
+        <li><code class="e">hathoora</code>: to define framework confirguation within scope of application.</li>
+        <li><code class="e">services</code>: for defining <a href="/sample/docs/view/services">services</a> within scope of application.</li>
+        <li><code class="e">listeners</code>: for defining <a href="/sample/docs/view/listeners">listeners</a> within scope of application.</li>
+        <li>Define anything else for your application needs.</li>
+    </ul>
+    <p>
+        Learn more about how to access configurations <a href="/sample/docs/view/container#configuration">here</a>.
+    </p>
 </div>

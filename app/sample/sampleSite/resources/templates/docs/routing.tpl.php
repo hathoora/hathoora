@@ -30,7 +30,7 @@
         </code>
     </pre>
     <p>
-        In above example the request will be routed to <code class="inline">public</code> <b>list</b> method of <b>blogController</b> with <b>param1 & param2</b> as method arguments. A sample controller would look something like the following:
+        In this example the request will be routed to <code class="e">public</code> <code class="inline">list</code> method of <code class="inline">blogController</code> with <b>param1 & param2</b> as method arguments. A sample controller would look something like this.
     </p>
     <pre>
         <code class="hljs php">
@@ -59,7 +59,7 @@
     <a name="defaultController"></a>
     <h2>Default Controller</h2>
     <p>
-        Index page or homepage of an application is routed to defaultController.
+        <code class="e">Index</code> page or homepage of an application is routed to <code class="inline">defaultController</code>.
     </p>
     <pre>
         <code class="hljs bash">
@@ -67,7 +67,7 @@
         </code>
     </pre>
     <p>
-        In above example the request will be routed to <code class="inline">public</code> <b>index</b> method of <b>defaultController</b>. A sample controller would look something like the following:
+        In this example the request will be routed to <code class="e">public</code> <code class="inline">index</code> method of <code class="inline">defaultController</code>. A sample controller would look something like the following.
     </p>
     <pre>
         <code class="hljs php">
@@ -95,7 +95,7 @@
     <a name="defaultIndex"></a>
     <h2>Default Action</h2>
     <p>
-        If you don't specity an action for a controller, then <code class="inline">public</code> <b>index</b> method of that controller is called.
+        If you don't specity an action for a controller, then <code class="e">public</code> <code class="inline">index</code> method of that controller is called.
     </p>
     <pre>
         <code class="hljs bash">
@@ -103,7 +103,7 @@
         </code>
     </pre>
     <p>
-        In above example the request will be routed to <code class="inline">public</code> <b>index</b> method of <b>blogController</b>.
+        In this example the request will be routed to <code class="e">public</code> <code class="inline">index</code> method of <code class="inline">blogController</code> as shown below.
     </p>
     <pre>
         <code class="hljs php">
@@ -141,7 +141,7 @@
         </code>
     </pre>
     <p>
-        In above example both requests will be routed to <code class="inline">public</code> <b>orderBy</b> method of <b>blogController</b> with <b>name</b> as method argument.
+        In this example both requests will be routed to <code class="e">public</code> <code class="inline">orderBy</code> method of <code class="inline">blogController</code> with <b>name</b> as method argument. The code would look like this.
     </p>
     <pre>
         <code class="hljs php">
@@ -173,9 +173,9 @@
         In above examples routing was based on URI, the part after the domain.
     </p>
     <p>
-        However Hathoora PHP Frameworks allows you to change the domain identifier which would have an impact on the meaning of URI.</p>
+        However Hathoora PHP Frameworks allows you to change the domain identifier (using <a class="e" href="/sample/docs/configuration#applicationmultiple">regex patterns</a>) which would change the meaning of URI.</p>
     <p>
-        To iterate over this point consider the following <code class="inline">HATHOORA_ROOTPATH/boot/config/app.yml</code> configuration.
+        To iterate over this point consider the following application specific configuration.
     </p>
     <pre>
         <code class="hljs Ini">
@@ -194,8 +194,8 @@
         Now consider the following URLs to understand the concept and the controller to which they would be routed to:
     </p>
     <ul>
-        <li>http://www.example.com/blog/list will be handled by <code class="inline">app/site/controller/blogController::list</code>
-        <li>http://www.example.com/panel/admin/list will be handled by <code class="inline">app/admin/controller/listController::index</code>
+        <li><code class="e">http://www.example.com/blog/list</code> will be handled by <code class="inline">app/site/controller/blogController::list</code>
+        <li><code class="e">http://www.example.com/panel/admin/list</code> will be handled by <code class="inline">app/admin/controller/listController::index</code>
     </ul>
 
 
@@ -208,7 +208,7 @@
     <a name="dispatcher"></a>
     <h2>Custom Dispatcher</h2>
     <p>
-        Custom dispatchers is a PHP class and are defined per application souce in <code class="inline">HATHOORA_ROOTPATH/boot/config/app.yml</code> configuration.
+        Custom dispatcher is a PHP class defined per application configuration. To enable it, you need to define <code class="inline">dispatcher</code> parameter in configuration as shown below.
     </p>
 
     <pre>
@@ -229,12 +229,12 @@
         </code>
     </pre>
     <p>
-        In the above example requests for admin would be sent to <code class="inline">app/admin/appDispatcher::dispatch</code> which must return an array containing:
+        In this example requests for <code class="e">site</code> would be handled normally, however requests for admin would be sent to <code class="inline">app/admin/appDispatcher::dispatch</code> which must return an array containing:
     </p>
     <ul>
-        <li>controller</li>
-        <li>action</li>
-        <li>params</li>
+        <li><code class="e">controller</code> e.g. listController</li>
+        <li><code class="e">action</code> e.g. view</li>
+        <li><code class="e">array of params</code> e.g. ['title', 'id']</li>
     </ul>
     <p>
         To see advanced routing in action, consider the following sample code:
@@ -301,14 +301,14 @@
         You can also use Apache rewrite for routing URLs. You would need to set the following params in Apache:
     </p>
     <ul>
-        <li>REDIRECT_HTRO</li>
-        <li>REDIRECT_HTRO_CONTROLLER</li>
-        <li>REDIRECT_HTRO_ACTION</li>
-        <li>REDIRECT_HTRO_PARAMS</li>
+        <li><code class="e">REDIRECT_HTRO</code></li>
+        <li><code class="e">REDIRECT_HTRO_CONTROLLER</code></li>
+        <li><code class="e">REDIRECT_HTRO_ACTION</code></li>
+        <li><code class="e">REDIRECT_HTRO_PARAMS</code></li>
     </ul>
 
     <p>
-        The following example routes a URL <code class="inline">http://mysite.com/posts/1-hello-world</code> to <code class="inline">postsController::view($id, $slug)</code>.
+        The following example routes a URL <code class="e">http://mysite.com/posts/1-hello-world</code> to <code class="inline">postsController::view($id, $slug)</code>.
     </p>
     <pre>
         <code class="hljs php">

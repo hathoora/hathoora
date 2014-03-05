@@ -35,25 +35,14 @@
         </code>
     </pre>
     <p>
-        This command may take several minutes to run as Composer downloads Hathoora PHP Framework along with all of the vendor libraries that it needs. When it finishes, you should have a directory that looks something like this:
+        This command may take several minutes to run as Composer downloads Hathoora PHP Framework along with all of the vendor libraries that it needs. When it finishes, you should have a directory like <a href="/sample/docs/view/organization#layout">this</a>.
     </p>
-    <pre>
-        <code class="hljs bash">
-            /some/path/
-                hathoora/             (the new directory, also referred as HATHOORA_ROOTPATH)
-                    app/
-                    boot/
-                        config/
-                    docroot/          (this will be docroot of your apache configuration)
-                    vendor/
-        </code>
-    </pre>
 
 
     <a name="source"></a>
     <h2>Source</h2>
     <p>
-        Download the code from <a href="https://github.com/Pakeela/hathoora">GitHub repostiory</a>
+        Download the code from <a href="https://github.com/Pakeela/hathoora">GitHub</a>.
     </p>
 
     <a name="apache"></a>
@@ -102,7 +91,7 @@
     </p>
     <br/>
     <p>
-        Inspired by <a href="http://html5boilerplate.com/" target="_blank">HTML5 ★ Boilerplate</a>In addition to above front controller rewrite, .htaccess is equipped with other goodies like gzip compression, assets expiration and prevent GIT/SVN files access. You can view the complete .htaccess file by clicking <a href="https://github.com/Pakeela/hathoora/blob/master/docroot/.htaccess">here</a>.
+        Inspired by <a href="http://html5boilerplate.com/" target="_blank">HTML5 ★ Boilerplate</a>, in addition to above front controller rewrite, .htaccess is equipped with other goodies like gzip compression, assets expiration and prevent GIT/SVN/etc files access. You can view the complete .htaccess file by clicking <a href="https://github.com/Pakeela/hathoora/blob/master/docroot/.htaccess">here</a>.
     </p>
     <br/>
     <br/>

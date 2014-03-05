@@ -9,18 +9,21 @@ use hathoora\controller\controller;
 class docsController extends controller
 {
     public $arrNav = array(
+        'Overview' => array(
+            'introduction' => 'Introduction',
+            'concetps' => 'Concepts',
+            'organization' => 'Organization'
+        ),
         'Getting Started' => array(
             'installation' => 'Installation',
-            'structure' => 'File Structure',
             'configuration' => 'Configuration',
-            'routing' => 'Routing & Pretty URLs',
+            'routing' => 'Routing',
             'controller' => 'Controller',
-            'view' => 'View & Templates',
+            'view' => 'Templates',
             'validation' => 'Validation',
             'model' => 'Model',
         ),
         'Learning More' => array(
-            'lifecycle' => 'Request Lifecycle',
             'database' => 'Database',
             'grid' => 'Grid',
             'cache' => 'Caching',

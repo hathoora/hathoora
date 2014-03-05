@@ -43,7 +43,7 @@
         Templates are located in <code class="inline">HATHOORA_ROOTPATH/app/appNAME/resources/templates</code> folder.
     </p>
     <p>
-        A sample example of how a template is used from controller is shown below.
+        An example of how a template is used from controller is shown below.
     </p>
     <pre>
         <code class="hljs php">
@@ -77,7 +77,7 @@
         </code>
     </pre>
     <p>
-        In above example <code class="inline">HATHOORA_ROOTPATH/app/appNAME/resources/templates/index.tpl.php</code> will be used which may look like the following.
+        In this example <code class="inline">HATHOORA_ROOTPATH/app/appNAME/resources/templates/index.tpl.php</code> will be used which may look like the following.
     </p>
     <pre>
         <code class="hljs php">
@@ -95,7 +95,7 @@
         </code>
     </pre>
     <p>
-        In above example <code class="inline">$title</code> and <code class="inline">$date</code> were dynamic variables assigned via controller.
+        In above example <code class="e">$title</code> and <code class="e">$date</code> were dynamic variables assigned via controller.
     </p>
 
     <a name="anywhere"></a>
@@ -160,7 +160,7 @@
     <a name="apps"></a>
     <h2>Using Templates From Other Apps</h2>
     <p>
-        If you have <a href="/sample/docs/configuation#application-multiple">multiple applications</a> then you can use templates from one application into another. Consider the following example:
+        If you have <a href="/sample/docs/configuation#applicationmultiple">multiple applications</a> then you can use templates from one application into another. Consider the following example:
     </p>
     <pre>
         <code class="hljs php">
@@ -186,8 +186,8 @@
                     );
 
                     // full path of other app
-                    $route = $this->getRouteRequest('otherAPPName');
-                    $appPath = $route->getAppDirectory() . '/resources/templates/';
+                    $route = $this->getRouteRequest();
+                    $appPath = $route->getAppDirectory('otherAPPName') . '/resources/templates/';
                     $templatePath = $appPath . 'layout.tpl.php';
 
                     $template = $this->template($templatePath, $arrTplVars);
@@ -198,16 +198,18 @@
             }
         </code>
     </pre>
-
+    <p>
+        In this example we are using <a href="/sample/docs/view/container">container</a>'s <code class="inline">$this->getRouteRequest()->getAppDirectory()</code> method to get absoulte path of other app. But you can also hard code path (if needed).
+    </p>
 
     <a name="engines"></a>
     <h2>Template Engines</h2>
     <p>
-        You have the ability to choose which template engine to use. The default enging is <a href="#Stuob">Stuob</a>. Template engine is <a href="/sample/docs/view/configuration#configuration"defined per application</a> like following:
+        You have the ability to choose which template engine to use. The default enging is <a href="#Stuob">Stuob</a>. Template engine is defined like so.
     </p>
     <pre>
         <code class="hljs Ini">
-            # File HATHOORA_ROOTPATH/app/appNAME/config/config_ENV.yml
+            # File HATHOORA_ROOTPATH/app/appNAME/config/config_HATHOORA_ENV.yml
 
             # framework configurations..
             hathoora:
@@ -233,7 +235,7 @@
     </p>
     <pre>
         <code class="hljs Ini">
-            # File HATHOORA_ROOTPATH/app/appNAME/config/config_ENV.yml
+            # File HATHOORA_ROOTPATH/app/appNAME/config/config_HATHOORA_ENV.yml
 
             # framework configurations..
             hathoora:

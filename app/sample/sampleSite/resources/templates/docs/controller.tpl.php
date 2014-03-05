@@ -32,13 +32,13 @@
     <a name="basics"></a>
     <h2>Basics</h2>
     <p>
-        Controller is a php class located at <code class="inline">HATHOORA_ROOTPATH/app/appNAME/controller</code> and is suffixed with "Controller".
+        Controller is a PHP class located in <code class="e">controller</code> folder of an application and is suffixed with "Controller" e.g. <code class="inline">blogController</code>.
     </p>
     <p>
         A controller takes a request, does something on it and returns a response object <code class="inline">hathoora/http/response</code>
     </p>
     <p>
-        Sample controller code.
+        Sample controller code is shown below.
     </p>
     <pre>
         <code class="hljs php">
@@ -70,11 +70,14 @@
             }
         </code>
     </pre>
+    <p>
+        In this example we are extending <code class="inline">hathoora\controller\controller</code> and by doing so our controller gets access to <a href="/sample/docs/view/container">container</a>.
+    </p>
 
     <a name="barebone"></a>
     <h2>Barebone Controller</h2>
     <p>
-        <a href="basics">Above example</a> can also be coded as following without extending <code class="inline">hathoora\controller\controller</code>.
+        <a href="basics">Above example</a> can also be coded as following <b>without extending</b> <code class="inline">hathoora\controller\controller</code>.
     </p>
     <pre>
         <code class="hljs php">
@@ -110,7 +113,7 @@
     <a name="tplVars"></a>
     <h2>Global Template Variables</h2>
     <p>
-        Often time a variable needs to be assigned globally throughout included templates. This is achieved by following:
+        Often time variable needs to be assigned globally throughout included templates. This is achieved by using <code class="inline">setTplVarsByRef</code> and <code class="inline">setTplVars</code> as shown below.
     </p>
     <pre>
         <code class="hljs php">
@@ -153,7 +156,7 @@
     <a name="base"></a>
     <h2>Base Controllers</h2>
     <p>
-        The above example of defining global template variables can also be achived by using a base controller, where the name 'base' can by anything.
+        The above example of defining global template variables can also be achived by using a <code class="e">base controller</code>, where the name 'base' can by anything.
     </p>
     <pre>
         <code class="hljs php">
@@ -268,7 +271,7 @@
 
     <a name="container"></a>
     <h2>Accessing Container</h2>
-        If your contoller is extending <code class="inline">hathoora/container/*</code> then you have access to <a href="/sample/docs/container">container</a> within the scope of controller.
+        If your contoller is extending <code class="inline">hathoora/container/*</code> then you have access to <a href="/sample/docs/view/container">container</a> within the scope of controller.
     </p>
     <pre>
         <code class="hljs php">
@@ -430,7 +433,7 @@
         </code>
     </pre>
     <p>
-        Flash messages are stored in session under the name <code class="inline">httpFlash</code>. They can then be rendered inside template by doing something like the following
+        Flash messages are stored in session under the name <code class="e">httpFlash</code>. They can then be rendered inside template by doing something like the following
     </p>
     <pre>
         <code class="hljs php">
@@ -479,16 +482,13 @@
         RESTful controllers are achieved by extending <code class="inline">hathoora\controller\CRUD</code> and using the following convention (for a chat room endpoint).
     </p>
     <ul>
-        <li>Getting list of records -> GET /room -> <code class="inline">collection()</code></li>
-        <li>Getting record info -> GET /room/12 -> <code class="inline">read($id)</code></li>
-        <li>Creating new record -> POST /room -> <code class="inline">create()</code></li>
-        <li>Updating existing record -> UPDATE /room/12 -> <code class="inline">update($id)</code></li>
+        <li>Getting list of records -> <code class="e">GET /room</code> -> <code class="inline">collection()</code></li>
+        <li>Getting record info -> <code class="e">GET /room/12</code> -> <code class="inline">read($id)</code></li>
+        <li>Creating new record -> <code class="e">POST /room</code> -> <code class="inline">create()</code></li>
+        <li>Updating existing record -> <code class="e">UPDATE /room/12</code> -> <code class="inline">update($id)</code></li>
     </ul>
     <p>
         Consider a sample class which demonstrate this.
-    </p>
-    <p>
-        Following example demonstrates setting flash message and redirects.
     </p>
     <pre>
         <code class="hljs php">
@@ -544,4 +544,7 @@
             }
         </code>
     </pre>
+    <p>
+        <code class="inline">hathoora\controller\CRUD</code> doesn't have any implementation for authentication or sending appropriates headers, you would have to create one that suits your needs.
+    </p>
 </div>
