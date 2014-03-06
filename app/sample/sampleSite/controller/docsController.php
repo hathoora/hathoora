@@ -22,6 +22,7 @@ class docsController extends controller
             'view' => 'Templates',
             'validation' => 'Validation',
             'model' => 'Model',
+            'debugging' => 'Debugging'
         ),
         'Learning More' => array(
             'container' => 'Container',
@@ -31,6 +32,7 @@ class docsController extends controller
             'cache' => 'Caching',
             'listeners' => 'Listeners',
             'translations' => 'Translations',
+            'cli' => 'Command Line'
         )
     );
 
