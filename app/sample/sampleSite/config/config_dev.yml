@@ -1,3 +1,0 @@
-# Import config which will be overwritten
-importss:
-    - { resource: config_prod.yml }

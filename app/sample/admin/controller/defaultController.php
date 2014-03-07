@@ -1,15 +1,15 @@
 <?php
 namespace admin\controller;
 
-use hathoora\controller\controller;
-
 /**
  * Default controller
  */
-class defaultController extends controller
+class defaultController extends baseController
 {
     public function __construct()
-    { }
+    {
+        parent::__construct();
+    }
     
     /**
      * Homepage action

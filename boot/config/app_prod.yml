@@ -2,13 +2,16 @@
 app:
     # admin site
     admin:
-        pattern: '/sample/admin(|/)'
+        pattern: '/admin(|/)'
         directory: sample
 
-    # sample site
-    sampleSite:
-        pattern: '/sample(|/)'
+    # docs site
+    docs:
+        pattern: '/docs(|/)'
         directory: sample
+        dispatcher:
+            class: customDispatcher
+            method: dispatch
 
     # Default site
     site:

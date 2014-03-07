@@ -4,7 +4,7 @@
     "description": "Hathoora PHP Framework",
     "keywords": ["framework"],
     "minimum-stability": "dev",
-    "homepage": "http://labs.pakeela.com/hathoora",
+    "homepage": "http://hathoora.org",
     "license": "MIT",
     "authors": [
         {

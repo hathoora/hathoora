@@ -1,19 +1,11 @@
 <?php
     $this->start('body');
 ?>
-    <div class="leftPanel">
-        so?
+    <div>
+        <a href="/docs">Click here to read documentation.</a>
     </div>
-    <div class="rightPanel">
-        <ul>
-            <li>Simple </li>
-        </ul>
-    </div>
-    <div class="clearfix"></div>
-
-
 <?php
     $this->end('body');
 
-    // use the template from sample/sampleSite/resouces/templates/
-    $this->extend($this->getRouteRequest()->getAppDirectory('sampleSite') . 'resources/templates/layout.tpl.php');
+    // use the template from sample/docs/resouces/templates/
+    $this->extend($this->getRouteRequest()->getAppDirectory('docs') . 'resources/templates/layout.tpl.php');
