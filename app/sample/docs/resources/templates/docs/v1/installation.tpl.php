@@ -31,7 +31,7 @@
     </p>
     <pre>
         <code class="hljs bash">
-            php composer.phar create-project -s "dev" pakeela/hathoora /some/path/hathoora
+            php composer.phar create-project -s "dev" hathoora/hathoora /some/path/hathoora
         </code>
     </pre>
     <p>

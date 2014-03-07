@@ -108,7 +108,7 @@
             <div id="header_inner">
                 <h1><a href="http://hathoora.org">Hathoora PHP Framework</a></h1>
                 <ul class="menu">
-                    <li><a href="https://github.com/pakeela/hathoora">Download</a></li>
+                    <li><a href="https://github.com/hathoora/hathoora">Download</a></li>
                 </ul>
 
                 <!--
