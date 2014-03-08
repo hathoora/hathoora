@@ -97,6 +97,18 @@
         .hathooraGrid table.hathooraTable tbody tr:first-child { box-shadow: 0 1px 0px #fff inset; -webkit-box-shadow: 0 1px 0px #fff inset; -moz-box-shadow: 0 1px 0px #fff inset; }
         .hathooraGrid table.hathooraTable tbody tr:nth-child(even) { background: #f2f2f2; }
 
+        .hathooraGrid table.hathooraTable thead th.s { width: 1%; }
+        .hathooraGrid table.hathooraTable tbody th.m { width: 8%; }
+        .hathooraGrid table.hathooraTable thead th.1 { width: 20%; }
+        .hathooraGrid table.hathooraTable tbody td.d { text-align: right; }
+
+        .hathooraPreTable { margin-bottom:10px; }
+        .hathooraPostTable { margin-top:10px; }
+        .hathooraPaginatorInfo { color:#333; }
+        .hathooraPaginator { text-align: right; margin-top:-10px; }
+        .hathooraPaginator a { display:inline-block;  padding:3px; background: #F1F1F1; margin-right: 2px; }
+        .hathooraPaginator a.hathooraPagiActive { background: #FFF2AC; }
+        .hathooraPaginator:after { clear: both; }
     </style>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css"> 

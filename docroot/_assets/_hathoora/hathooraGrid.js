@@ -91,7 +91,7 @@
                             cache: false,
                             beforeSend: function()
                             {
-                                $('#' + table_id + '_inner').html('<div class="please_wait">Pleae wait...</div>');
+                                $('#' + table_id + '_inner').html('<div class="please_wait"></div>');
                             },
                             success: function(data, textStatus, xhr)
                             {
@@ -140,7 +140,7 @@
                     }
 
                     // ajax fetch link
-                    $('#' + table_id + '_inner .tablePager_paginate a, #' + table_id + ' .hathooraGridAjax').click(function()
+                    $('#' + table_id + '_inner .hathooraPaginator a, #' + table_id + ' .hathooraGridAjax').click(function()
                     {
                         table_id = $(this).parents('.hathooraGrid').attr('table_id');
                         if (typeof hathooraGrid['tables'][table_id]['columns'] == 'object')

@@ -12,6 +12,7 @@ class baseController extends controller
     {
         $arrNav = array(
             'Admin Nav' => array(
+                '/admin' => 'Home',
                 'translation' => 'Translations'
             )
         );

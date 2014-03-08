@@ -21,7 +21,8 @@ class translation extends grid
     {
         $table_id = 'tk_grd';
 
-        $arrGridPrepare['table']['fields']['jail'] = array('renderRoom');
+        $arrGridPrepare['table']['fields']['jail'] = array('translation_id', 'item', 'language', 'translationFieldNameNotInDbField','notes', 'date_added', 'date_modified');
+        $arrGridPrepare['table']['fields']['default'] = array('translation_id', 'item', 'language', 'translationFieldNameNotInDbField');
         self::translationGridHelper($table_id, $arrGridPrepare);
 
         // Sanitize grid (sort, order, limit and where criteria)
@@ -53,12 +54,12 @@ class translation extends grid
                 'dynamic' => false,
             ),
             'limit' => array(
-                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 10,
+                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 1,
                 'limits' => array(20, 50),
                 'max' => 50,
             ),
             'sort' => array(
-                'default' => !empty($arrGridPrepare['table']['sort']['default']) ? $arrGridPrepare['table']['sort']['default'] : 'tk.translation_id',
+                'default' => !empty($arrGridPrepare['table']['sort']['default']) ? $arrGridPrepare['table']['sort']['default'] : 'translation_id',
                 'url' => !empty($arrGridPrepare['table']['sort']['url']) ? $arrGridPrepare['table']['sort']['url'] : null,
             ),
             'order' => array(
@@ -68,7 +69,7 @@ class translation extends grid
                 // don't display table thead
                 'noTableHead' => false,
                 // top pager is disabled by default
-                'topPager' => isset($arrGridPrepare['table']['options']['topPager']) ? $arrGridPrepare['table']['options']['topPager'] : false,
+                'topPager' => isset($arrGridPrepare['table']['options']['topPager']) ? $arrGridPrepare['table']['options']['topPager'] : true,
                 // bottom pager is enabled by default
                 'bottomPager' => isset($arrGridPrepare['table']['options']['bottomPager']) ? $arrGridPrepare['table']['options']['bottomPager'] : true,
             )
@@ -90,26 +91,37 @@ class translation extends grid
         $arrFields = array(
             'translation_id' => array(
                 'name' => 'ID',
-                'classTH' => 'tk'
+                'classTH' => 's'
             ),
             'item' => array(
                 'name' => 'Item',
-                'classTH' => 'item'
+                'classTH' => 'm'
             ),
             'language' => array(
-                'name' => 'Lang'
+                'name' => 'Lang',
+                'classTH' => 's'
             ),
-            'translation' => array(
-                'name' => 'Translation'
+            'translationFieldNameNotInDbField' => array(
+                'name' => 'Translation',
+                'classTH' => 'l',
+                'dependency' => array(
+                    'selectField' => array(
+                        'translation' => 'translation'
+                    )
+                )
+
             ),
             'notes' => array(
-                'name' => 'Names'
+                'name' => 'Names',
+                'classTH' => 'l'
             ),
             'date_added' => array(
-                'name' => 'Added'
+                'name' => 'Added',
+                'classTD' => 'd'
             ),
             'date_modified' => array(
-                'name' => 'Modified'
+                'name' => 'Modified',
+                'classTD' => 'd'
             )
         );
 
