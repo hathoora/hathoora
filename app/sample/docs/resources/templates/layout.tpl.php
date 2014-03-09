@@ -63,6 +63,7 @@
          #container #footer { width:980px; margin:0 auto; }
          code.hljs { overflow:auto; margin-left:-15px; width:744px; }
          .e { color: #AA1144; }
+         .gray { color:#ccc; }
          code.inline {
             background-color: #F8F8F8;
             color:#4A842D;
@@ -90,17 +91,29 @@
         .hathooraGrid table.hathooraTable thead th { border-left: 1px solid #DFDFDF; }
         .hathooraGrid table.hathooraTable tbody td:first-child,
         .hathooraGrid table.hathooraTable thead th:first-child { border-left: none; }
-        .hathooraGrid table.hathooraTable thead th { text-align: left; padding: 3px 5px 2px 10px; color: #909090; background: #eee; border-top:1px solid #CDCDCD; }
+        .hathooraGrid table.hathooraTable thead th { text-align: left; padding: 3px 0px 2px 0px; color: #909090; background: #eee; border-top:1px solid #CDCDCD; }
         .hathooraGrid table.hathooraTable tbody td { padding: 7px 11px; vertical-align: middle; }
         .hathooraGrid table.hathooraTable tbody tr:hover td,
         .hathooraGrid table.hathooraTable tbody tr { border-top: 1px solid #DFDFDF; }
         .hathooraGrid table.hathooraTable tbody tr:first-child { box-shadow: 0 1px 0px #fff inset; -webkit-box-shadow: 0 1px 0px #fff inset; -moz-box-shadow: 0 1px 0px #fff inset; }
         .hathooraGrid table.hathooraTable tbody tr:nth-child(even) { background: #f2f2f2; }
 
-        .hathooraGrid table.hathooraTable thead th.s { width: 1%; }
-        .hathooraGrid table.hathooraTable tbody th.m { width: 8%; }
-        .hathooraGrid table.hathooraTable thead th.1 { width: 20%; }
+        .hathooraGrid table.hathooraTable thead th.s { width: 3%; }
+        .hathooraGrid table.hathooraTable thead th.m { width: 8%; }
+        .hathooraGrid table.hathooraTable thead th.1 { width: 12%; }
         .hathooraGrid table.hathooraTable tbody td.d { text-align: right; }
+
+        /* coulmn sort & delete */
+        .hathooraGrid .hathooraColumnName { float: left; padding-left:8px; margin-right: 40px; }
+        .hathooraGrid .hathooraColumnOptions { float:right; width:40px; overflow:hidden; margin-left:-40px; }
+        .hathooraGrid .hathooraColumnSort { display: none; font-weight: bold; float: right; cursor: pointer; margin-right: 5px; }
+        .hathooraGrid .hathooraColumnDel { display: none; font-weight: bold; float: right; cursor: pointer; color:red; margin-right: 5px; }
+        /* column is sorted */
+        .hathooraGrid .hathooraColumnSorted { background:#FFF2AC !important; }
+        .hathooraGrid .hathooraColumnSorted .hathooraColumnSort { display:block; }
+
+        .hathooraGrid table.hathooraTable thead th:hover .hathooraColumnSort,
+        .hathooraGrid table.hathooraTable thead th:hover .hathooraColumnDel { display: block; }
 
         .hathooraPreTable { margin-bottom:10px; }
         .hathooraPostTable { margin-top:10px; }
@@ -108,10 +121,30 @@
         .hathooraPaginator { text-align: right; margin-top:-10px; }
         .hathooraPaginator a { display:inline-block;  padding:3px; background: #F1F1F1; margin-right: 2px; }
         .hathooraPaginator a.hathooraPagiActive { background: #FFF2AC; }
-        .hathooraPaginator:after { clear: both; }
+
+        /* flash messages */
+        .flash {
+            margin:0 auto;
+            background-color: #FCF8E3;
+            border: 1px solid #FBEED5;
+            color: #C09853;
+            margin-bottom: 18px;
+            padding: 8px 20px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+        .flash > p { padding:0px !important; }
+        .flash.error { background-color: #F2DEDE;
+            border-color: #EED3D7;
+            color: #B94A48; }
+        .flash.success {  background-color: #DFF0D8;
+            border-color: #D6E9C6;
+            color: #468847; }
+        .flash.info {   background-color: #D9EDF7;
+            border-color: #BCE8F1;
+            color: #3A87AD; }
+
     </style>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css"> 
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
     <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
 </head>
 <body class=" ">
@@ -133,6 +166,7 @@
         </div>
         <div id="body">
             <?php
+                $this->load($this->getRouteRequest()->getAppDirectory('docs') . '/resources/templates/components/flashMessages.tpl.php');
                 $this->block('body');
             ?>
         </div>

@@ -14,6 +14,7 @@ hathoora:
         cache_time: 86400
         dsn: default
         hide_empty_items: false
+        languages: [ en_US, fr_FR ]
 
     database:
         default: mysql://dbuser:dbpassword@localhost:3306/dbname

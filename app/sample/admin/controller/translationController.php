@@ -30,13 +30,12 @@ class translationController extends baseController
 
 
         // this is not request for hathoora grid (via ajax)
-        if (!$request->isAjax() && !$request->getParam('pajax'))
+        if (!$request->isAjax())
         {
             $arrTplParams['currentNav'] = 'translation';
             $arrTplParams['selectedSubNav'] = array(
                                                          'add' => 'Add New'
                                                     );
-
 
             $template = $this->template('translation/index.tpl.php', $arrTplParams);
             $response = $this->response($template);
@@ -44,6 +43,36 @@ class translationController extends baseController
         else
         {
             $response = $this->response($arrTplParams['grid']);
+        }
+
+        return $response;
+    }
+
+    /**
+     * edit translation
+     */
+    public function edit($id = null)
+    {
+        $arrInfo = $this->getService('translation')->getItemInfo($id);
+
+        if (is_array($arrInfo))
+        {
+            $arrTplParams = array();
+            $arrTplParams['arrLanguages'] = $this->getService('translation')->getLanguages();
+            $arrTplParams['arrForm'] =& $arrInfo;
+            $arrTplParams['currentNav'] = 'translation';
+            $arrTplParams['selectedSubNav'] = array(
+                                                         'add' => 'Add New'
+                                                    );
+
+            $template = $this->template('translation/edit.tpl.php', $arrTplParams);
+            $response = $this->response($template);
+        }
+        // id doesn't exist
+        else
+        {
+            $response = $this->response();
+            $response->forward('/admin/translation', 'Incorrect translation id', 'error');
         }
 
         return $response;

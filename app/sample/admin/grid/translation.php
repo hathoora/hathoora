@@ -21,14 +21,20 @@ class translation extends grid
     {
         $table_id = 'tk_grd';
 
-        $arrGridPrepare['table']['fields']['jail'] = array('translation_id', 'item', 'language', 'translationFieldNameNotInDbField','notes', 'date_added', 'date_modified');
-        $arrGridPrepare['table']['fields']['default'] = array('translation_id', 'item', 'language', 'translationFieldNameNotInDbField');
+        $arrGridPrepare['table']['fields']['jail'] = array('item', 'language', 'translationFieldNameNotInDbField', 'actions');
+
+        // default columns to show when hathoora grid renders for first time
+        $arrGridPrepare['table']['fields']['default'] = array('item', 'language', 'translationFieldNameNotInDbField', 'actions');
+
+        // allow users to change columns (delete, reorder etc..);
+        $arrGridPrepare['table']['fields']['dynamic'] = true;
+
         self::translationGridHelper($table_id, $arrGridPrepare);
 
         // Sanitize grid (sort, order, limit and where criteria)
         self::prepare($arrGridPrepare, $arrFormData);
 
-        return parent::getService('translator')->grid($arrGridPrepare, $render);
+        return parent::getService('translation')->grid($arrGridPrepare, $render);
     }
 
     /**
@@ -41,7 +47,7 @@ class translation extends grid
     {
         $arrGridPrepare['table'] = array(
             'id' => $table_id,
-            'idRow' => $table_id .'_{{translation_id}}',
+            'idRow' => $table_id .'_{{uniq_id}}',
             'title' => !empty($arrGridPrepare['table']['title']) ? $arrGridPrepare['table']['title'] : null,
             'class' => !empty($arrGridPrepare['table']['class']) ? $arrGridPrepare['table']['class'] : null,
             'message' => array(
@@ -51,26 +57,23 @@ class translation extends grid
                 'available' => array(__CLASS__, 'fields'),
                 'jail' => !empty($arrGridPrepare['table']['fields']['jail']) ? $arrGridPrepare['table']['fields']['jail'] : null,
                 'default' => !empty($arrGridPrepare['table']['fields']['default']) ? $arrGridPrepare['table']['fields']['default'] : null,
-                'dynamic' => false,
+                'dynamic' => !empty($arrGridPrepare['table']['fields']['dynamic']) ? $arrGridPrepare['table']['fields']['dynamic'] : false,
             ),
             'limit' => array(
-                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 1,
+                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 20,
                 'limits' => array(20, 50),
                 'max' => 50,
             ),
             'sort' => array(
-                'default' => !empty($arrGridPrepare['table']['sort']['default']) ? $arrGridPrepare['table']['sort']['default'] : 'translation_id',
+                'default' => !empty($arrGridPrepare['table']['sort']['default']) ? $arrGridPrepare['table']['sort']['default'] : 'tk.translation_id',
                 'url' => !empty($arrGridPrepare['table']['sort']['url']) ? $arrGridPrepare['table']['sort']['url'] : null,
             ),
             'order' => array(
                 'default' => 'DESC',
             ),
             'options' => array(
-                // don't display table thead
                 'noTableHead' => false,
-                // top pager is disabled by default
-                'topPager' => isset($arrGridPrepare['table']['options']['topPager']) ? $arrGridPrepare['table']['options']['topPager'] : true,
-                // bottom pager is enabled by default
+                'topPager' => false,
                 'bottomPager' => isset($arrGridPrepare['table']['options']['bottomPager']) ? $arrGridPrepare['table']['options']['bottomPager'] : true,
             )
         );
@@ -89,13 +92,13 @@ class translation extends grid
     public static function fields()
     {
         $arrFields = array(
-            'translation_id' => array(
-                'name' => 'ID',
-                'classTH' => 's'
-            ),
             'item' => array(
                 'name' => 'Item',
-                'classTH' => 'm'
+                'classTH' => 'm',
+                'sort' => true,
+                'content' => array(
+                    'link' => '/admin/translation/edit/{{translation_id}}'
+                )
             ),
             'language' => array(
                 'name' => 'Lang',
@@ -104,6 +107,11 @@ class translation extends grid
             'translationFieldNameNotInDbField' => array(
                 'name' => 'Translation',
                 'classTH' => 'l',
+                'sort' => true,
+                'dbField' => 'tv.translation',
+                'content' => array(
+                    'function' => array(__CLASS__, 'renderTranslationField')
+                ),
                 'dependency' => array(
                     'selectField' => array(
                         'translation' => 'translation'
@@ -111,20 +119,15 @@ class translation extends grid
                 )
 
             ),
-            'notes' => array(
-                'name' => 'Names',
-                'classTH' => 'l'
-            ),
-            'date_added' => array(
-                'name' => 'Added',
-                'classTD' => 'd'
-            ),
-            'date_modified' => array(
-                'name' => 'Modified',
-                'classTD' => 'd'
+            'actions' => array(
+                'name' => 'Actions',
+                'dbField' => false,
+                'classTH' => 's',
+                'content' => array(
+                    'function' => array(__CLASS__, 'renderTranslationActions', array('exampleContext' => 1))
+                )
             )
         );
-
 
         return $arrFields;
     }
@@ -139,16 +142,27 @@ class translation extends grid
      * @param mixed $value of the current column
      * @param array $arrRow (by ref) the current row
      * @param array $arrGridData (by ref) the entire data
-     * @internal param array $context (by ref) context if send any
      *
-     * @return null
+     * @return mixed
      */
-    public static function renderTKHTML($value, &$arrRow, &$arrGridData)
+    public static function renderTranslationField($value, &$arrRow, &$arrGridData)
     {
-        //print_r($arrRow);
-        #ob_start();
-        #include(parent::getRouteRequest()->getAppDirectory('minePkChat') .'/resources/templates/components/room_render.tpl.php');
-        #$html = ob_get_clean();
+        return htmlentities($arrRow['translation']);
+    }
 
+    /**
+     * This function renders actions
+     *
+     * @param mixed $value of the current column
+     * @param array $arrRow (by ref) the current row
+     * @param array $arrGridData (by ref) the entire data
+     * @param array $context (by ref) context if send any
+     *
+     * @return mixed
+     */
+    public static function renderTranslationActions($value, &$arrRow, &$arrGridData, $context = null)
+    {
+        // logic as needed, who can view delete button?
+        return '<a href="/admin/translation/edit/{{translation_id}}">Edit</a> | <a href="/admin/translation/delete/{{translation_id}}">Del</a>';
     }
 }

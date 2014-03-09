@@ -118,23 +118,45 @@
                     page_current = hathooraGrid['tables'][table_id]['page'];
                     url_grid = hathooraGrid['tables'][table_id]['url'];
 
-                    // sortable table header
+
+                    // colum operations: sort, delete, reorder
                     if (hathooraGrid['tables'][table_id]['columns'] && $('#' + table_id + ' thead tr th').length)
                     {
                         $.each(columns, function(i,v)
                         {
                             field = v.field;
-                            if (v.sort)
+                            thElm = $('#' + table_id + ' thead tr th[htg-field="'+ v.field +'"]');
+
+                            // delete column
+                            if ($(thElm).find('.hathooraColumnDel').length)
                             {
-                                order_toggle = 'asc';
-                                if (order_current == 'asc')
-                                    order_toggle = 'desc';
+                                delIcon = $(thElm).find('.hathooraColumnDel');
+                                $(delIcon).live('click', function()
+                                {
+                                    table_id = $(this).parents('table.hathooraTable').attr('id');
+                                    var thInder = $('#' + table_id + ' thead th').index($(this).parents('th'));
 
-                                $('#' + table_id + ' thead tr th[field="'+ v.field +'"]').addClass('sorting hathooraGridAjax');
+                                    $(this).closest('th').remove();
+                                    $('#' + table_id + ' tbody tr td:nth-child(' + (thInder + 1) + ')').remove();
 
-                                // current field is currently sorted
-                                if (field == sort_current)
-                                    $('#' + table_id + ' thead tr th[field="'+ v.field +'"]').addClass('sorting_' + order_current).attr('order', order_toggle);
+                                    return false;
+                                });
+                            }
+
+                            // sorting bind
+                            if ($(thElm).find('.hathooraColumnSort').length)
+                            {
+                                // make column icons clickable..
+                                $(thElm).find('.hathooraColumnSort').addClass('hathooraGridAjax');
+
+                                // also bind sorting by clicking on name
+                                $(thElm).find('.hathooraColumnName')
+                                        .css('cursor', 'pointer')
+                                        .click(function()
+                                        {
+                                            $(this).parent('th').find('.hathooraColumnSort').click();
+                                            return false;
+                                        });
                             }
                         });
                     }
@@ -142,8 +164,8 @@
                     // ajax fetch link
                     $('#' + table_id + '_inner .hathooraPaginator a, #' + table_id + ' .hathooraGridAjax').click(function()
                     {
-                        table_id = $(this).parents('.hathooraGrid').attr('table_id');
-                        if (typeof hathooraGrid['tables'][table_id]['columns'] == 'object')
+                        table_id = $(this).parents('.hathooraGrid').attr('htg-table_id');
+                        if (typeof hathooraGrid['tables'][table_id] == 'object' && typeof hathooraGrid['tables'][table_id]['columns'] == 'object')
                             columns = hathooraGrid['tables'][table_id]['columns'];
                         sort_current = hathooraGrid['tables'][table_id]['sort'];
                         order_current = hathooraGrid['tables'][table_id]['order'].toLowerCase();
@@ -152,15 +174,19 @@
 
                         ajaxData = {'hathooraGrid_id': table_id}
 
-                        page = ($(this).attr('page') ? $(this).attr('page') : page_current);
+                        page = ($(this).attr('htg-page') ? $(this).attr('htg-page') : page_current);
                         if (page)
                             ajaxData.page = page;
 
-                        sort = ($(this).attr('field') ? $(this).attr('field') : sort_current);
+                        // is sortIcon?
+                        if ($(this).hasClass('hathooraColumnSort'))
+                            sort = ($(this).parents('th').attr('htg-field') ? $(this).parents('th').attr('htg-field') : sort_current);
+                        else
+                            sort = ($(this).attr('htg-field') ? $(this).attr('htg-field') : sort_current);
                         if (sort)
                             ajaxData.sort = sort;
 
-                        order = ($(this).attr('order') ? $(this).attr('order') : order_current);
+                        order = ($(this).attr('htg-order') ? $(this).attr('htg-order') : order_current);
                         if (order)
                             ajaxData.order = order;
 
@@ -186,6 +212,6 @@
                     });
                 }
             });
-        },
+        }
     });
 })(jQuery);
