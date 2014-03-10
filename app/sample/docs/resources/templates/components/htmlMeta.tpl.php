@@ -145,6 +145,7 @@
             padding: 8px 20px;
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
         .flash > p { padding:0px !important; }
+        .flash ul li { list-style: disc; margin-left: 30px; }
         .flash.error { background-color: #F2DEDE;
             border-color: #EED3D7;
             color: #B94A48; }
@@ -220,8 +221,8 @@
              display: block;
         }
          .smart-green select {
-             background: url('down-arrow.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
-             background: url('down-arrow.png') no-repeat right, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+             background: -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
+             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
             appearance:none;
              -webkit-appearance:none;
             -moz-appearance: none;

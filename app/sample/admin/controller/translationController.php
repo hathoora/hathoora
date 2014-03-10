@@ -91,18 +91,13 @@ class translationController extends baseController
                 $arrForm = $request->postParam();
 
                 if ($arrStoreResult = $this->getService('translation')->store($action, $arrForm))
-                {
-                    if (is_array($arrStoreResult['error']))
-                    {
-                        $response->setFlash($arrStoreResult['error'], 'error');
-                    }
-                }
+                    $response->setFlash($arrStoreResult['message'], $arrStoreResult['status']);
 
                 $arrTplParams['arrForm'] =& $arrForm;
             }
 
             $template = $this->template('translation/store.tpl.php', $arrTplParams);
-            $response->set($template);
+            $response->setContent($template);
         }
 
         return $response;

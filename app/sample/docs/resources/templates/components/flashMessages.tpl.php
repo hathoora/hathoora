@@ -18,6 +18,8 @@
 
                 if (is_array($arrMessage) || is_object($arrMessage))
                 {
+                    echo '<p>There was an error processing your request.</p>';
+
                     echo '<ul>';
                     foreach ($arrMessage as $k => $v)
                     {

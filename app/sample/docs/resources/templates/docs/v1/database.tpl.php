@@ -279,12 +279,12 @@
     </p>
     <pre>
         <code class="hljs php">
-            $db->beginTransaction();
             $rollBack = false;
 
             // using try catch
             try
             {
+                $db->beginTransaction();
                 $result = $db->fetchArray('UPDATE ...');
             }
             catch (\Exception $e)

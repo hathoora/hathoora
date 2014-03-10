@@ -117,7 +117,9 @@
             });
 
             $('textarea.translation').ckeditor({
-                height: 100
+                height: 100,
+                enterMode : CKEDITOR.ENTER_BR,
+                shiftEnterMode: CKEDITOR.ENTER_BR
             });
         } );
     </script>
