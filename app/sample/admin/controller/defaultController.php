@@ -16,6 +16,8 @@ class defaultController extends baseController
      */
     public function index()
     {
+        $this->arrHTMLMetas['title']['value'] = 'Admin Panel';
+
         $arrTplParams = array();
         $template = $this->template('index.tpl.php', $arrTplParams);
         $response = $this->response($template);

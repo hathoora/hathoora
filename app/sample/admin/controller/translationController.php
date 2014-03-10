@@ -32,11 +32,7 @@ class translationController extends baseController
         // this is not request for hathoora grid (via ajax)
         if (!$request->isAjax())
         {
-            $arrTplParams['currentNav'] = 'translation';
-            $arrTplParams['selectedSubNav'] = array(
-                                                         'add' => 'Add New'
-                                                    );
-
+            $this->navMenuHelper($arrTplParams);
             $template = $this->template('translation/index.tpl.php', $arrTplParams);
             $response = $this->response($template);
         }
@@ -53,28 +49,74 @@ class translationController extends baseController
      */
     public function edit($id = null)
     {
-        $arrInfo = $this->getService('translation')->getItemInfo($id);
+        return $this->store('edit', $id);
+    }
 
-        if (is_array($arrInfo))
-        {
-            $arrTplParams = array();
-            $arrTplParams['arrLanguages'] = $this->getService('translation')->getLanguages();
-            $arrTplParams['arrForm'] =& $arrInfo;
-            $arrTplParams['currentNav'] = 'translation';
-            $arrTplParams['selectedSubNav'] = array(
-                                                         'add' => 'Add New'
-                                                    );
+    /**
+     * add translation
+     */
+    public function add($id = null)
+    {
+        return $this->store('add', $id);
+    }
 
-            $template = $this->template('translation/edit.tpl.php', $arrTplParams);
-            $response = $this->response($template);
-        }
-        // id doesn't exist
+    /**
+     * Add edit helper
+     * @param $action
+     * @param null $id
+     */
+    private function store($action, $id = null)
+    {
+        $arrInfo = null;
+        $response = $this->response();
+
+        if ($action == 'edit')
+            $arrInfo = $this->getService('translation')->info($id);
+
+        // id doesn't exist..
+        if ($action == 'edit' && !is_array($arrInfo))
+            $response->forward('/admin/translation', 'Incorrect translation id', 'error');
         else
         {
-            $response = $this->response();
-            $response->forward('/admin/translation', 'Incorrect translation id', 'error');
+            $request = $this->getRequest();
+            $arrTplParams = array();
+            $this->navMenuHelper($arrTplParams);
+            $arrTplParams['translation_id'] = $id;
+            $arrTplParams['arrLanguages'] = $this->getService('translation')->getLanguages();
+            $arrTplParams['arrForm'] =& $arrInfo;
+
+            // form submitted?
+            if ($request->getRequestType() == 'POST')
+            {
+                $arrForm = $request->postParam();
+
+                if ($arrStoreResult = $this->getService('translation')->store($action, $arrForm))
+                {
+                    if (is_array($arrStoreResult['error']))
+                    {
+                        $response->setFlash($arrStoreResult['error'], 'error');
+                    }
+                }
+
+                $arrTplParams['arrForm'] =& $arrForm;
+            }
+
+            $template = $this->template('translation/store.tpl.php', $arrTplParams);
+            $response->set($template);
         }
 
         return $response;
+    }
+
+    /**
+     * navmnu helper..
+     */
+    private function navMenuHelper(&$arrTplParams)
+    {
+        $this->arrHTMLMetas['title']['value'] = 'Translations';
+        $arrTplParams['currentNav'] = 'translation';
+        $arrTplParams['selectedSubNav'] = array(
+                                                     'add' => 'Add New'
+                                                );
     }
 }

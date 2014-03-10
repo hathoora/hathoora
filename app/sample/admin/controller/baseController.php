@@ -17,6 +17,23 @@ class baseController extends controller
             )
         );
 
+        // assign global variables to the template for Meta tags (inside <head>)
+        $this->arrHTMLMetas = array(
+            'title' => array(
+                'type' => 'title',
+                'value' => ''
+            ),
+            'description' => array(
+                'type' => 'meta',
+                'value' => ''
+            ),
+            'keywords' => array(
+                'type' => 'meta',
+                'value' => ''
+            )
+        );
+
+        $this->setTplVarsByRef('arrHTMLMetas', $this->arrHTMLMetas);
         $this->setTplVarsByRef('arrNav', $arrNav);
     }
 }

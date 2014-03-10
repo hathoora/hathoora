@@ -21,10 +21,10 @@ class translation extends grid
     {
         $table_id = 'tk_grd';
 
-        $arrGridPrepare['table']['fields']['jail'] = array('item', 'language', 'translationFieldNameNotInDbField', 'actions');
+        $arrGridPrepare['table']['fields']['jail'] = array('translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
 
         // default columns to show when hathoora grid renders for first time
-        $arrGridPrepare['table']['fields']['default'] = array('item', 'language', 'translationFieldNameNotInDbField', 'actions');
+        $arrGridPrepare['table']['fields']['default'] = array('translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
 
         // allow users to change columns (delete, reorder etc..);
         $arrGridPrepare['table']['fields']['dynamic'] = true;
@@ -92,8 +92,8 @@ class translation extends grid
     public static function fields()
     {
         $arrFields = array(
-            'item' => array(
-                'name' => 'Item',
+            'translation_key' => array(
+                'name' => 'TK',
                 'classTH' => 'm',
                 'sort' => true,
                 'content' => array(

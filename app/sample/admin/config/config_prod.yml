@@ -13,7 +13,7 @@ hathoora:
         cache_service: @cache@
         cache_time: 86400
         dsn: default
-        hide_empty_items: false
+        hide_empty: false
         languages: [ en_US, fr_FR ]
 
     database:

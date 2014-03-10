@@ -7,7 +7,7 @@
             <h1>Translations</h1>
 
             <p>
-                Following is an example of grid in which you can view all fields.
+                Following is an example of <a href="/docs/v1/grid">grid</a>.
             </p>
             <?php echo $grid; ?>
         </div>

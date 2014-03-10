@@ -130,17 +130,19 @@
                             // delete column
                             if ($(thElm).find('.hathooraColumnDel').length)
                             {
-                                delIcon = $(thElm).find('.hathooraColumnDel');
-                                $(delIcon).live('click', function()
-                                {
-                                    table_id = $(this).parents('table.hathooraTable').attr('id');
-                                    var thInder = $('#' + table_id + ' thead th').index($(this).parents('th'));
+                                /*
+                                delIcon = $(thElm).find('.hathooraColumnDel')
+                                    .bind('click', function()
+                                    {
+                                        table_id = $(this).parents('table.hathooraTable').attr('id');
+                                        var thInder = $('#' + table_id + ' thead th').index($(this).parents('th'));
 
-                                    $(this).closest('th').remove();
-                                    $('#' + table_id + ' tbody tr td:nth-child(' + (thInder + 1) + ')').remove();
+                                        $(this).closest('th').remove();
+                                        $('#' + table_id + ' tbody tr td:nth-child(' + (thInder + 1) + ')').remove();
 
-                                    return false;
-                                });
+                                        return false;
+                                    });
+                                */
                             }
 
                             // sorting bind
