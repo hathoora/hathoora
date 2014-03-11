@@ -15,8 +15,12 @@
                             <ul>';
                 foreach($_arrNav as $navItem => $navName)
                 {
+                    $_url = '/docs/v1/'. $navItem;
+                    if (substr($navItem, 0, 1) == '/')
+                        $_url = $navItem;
+
                     $_selected = isset($currentNav) && $currentNav == $navItem ? ' selected ' : null;
-                    echo '<li><a href="/docs/v1/'. $navItem .'" class="'. $_selected  .'">'. $navName .'</a></li>';
+                    echo '<li><a href="'. $_url .'" class="'. $_selected  .'">'. $navName .'</a></li>';
                 }
                 echo '
                             </ul>

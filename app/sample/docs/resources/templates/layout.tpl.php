@@ -11,7 +11,8 @@
             <div id="header_inner">
                 <h1><a href="http://hathoora.org">Hathoora PHP Framework</a></h1>
                 <ul class="menu">
-                    <li><a href="https://github.com/hathoora/hathoora">Download</a></li>
+                    <li><a href="http://www.hathoora.org/docs/v1/installation">Download</a></li>
+                    <li><a href="http://www.hathoora.org/admin">Admin Site</a></li>
                 </ul>
 
                 <!--

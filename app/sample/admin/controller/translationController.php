@@ -44,6 +44,37 @@ class translationController extends baseController
         return $response;
     }
 
+   /**
+     * Translation's home
+     */
+    public function grid2()
+    {
+        $request = $this->getRequest();
+        $arrTplParams = array();
+
+        $arrGridPrepare = array(
+            'table' => array(
+                'title' => 'Table using <code class="inline">admin\grid\translation\translation::getTranslationRoute()</code>'
+            )
+        );
+        $arrTplParams['grid'] = translation::getTranslationRoute($arrGridPrepare, $request->getParam(), $render = true);
+
+
+        // this is not request for hathoora grid (via ajax)
+        if (!$request->isAjax())
+        {
+            $this->navMenuHelper($arrTplParams);
+            $template = $this->template('translation/grid2.tpl.php', $arrTplParams);
+            $response = $this->response($template);
+        }
+        else
+        {
+            $response = $this->response($arrTplParams['grid']);
+        }
+
+        return $response;
+    }
+
     /**
      * edit translation
      */
@@ -61,38 +92,11 @@ class translationController extends baseController
     }
 
     /**
-     * Toggle user selected language
-     */
-    public function toggleLanguage()
-    {
-        $request = $this->getRequest();
-        $prefLang = $request->sessionParam('language');
-        $redirectURL = '/admin/translation/example';
-
-        if ($request->serverParam('HTTP_REFERER'))
-            $redirectURL = $request->serverParam('HTTP_REFERER');
-
-        if ($prefLang == 'en_US')
-            $newLang = 'fr_FR';
-        else
-            $newLang = 'en_US';
-
-        $request->sessionParam('language', $newLang);
-
-        $respnse = $this->response();
-        $respnse->forward($redirectURL, 'Your language has been switched to <b>'. $newLang .'</b>', 'success');
-
-        Return $respnse;
-    }
-
-    /**
      * add translation
      */
     public function delete($id = null)
     {
-        $response = $this->response();
-
-        return $response;
+        return $this->store('delete', $id);
     }
 
     /**
@@ -107,6 +111,14 @@ class translationController extends baseController
 
         if ($action == 'delete')
         {
+            // don't let others delete demo tks
+            if ($id <= 3)
+            {
+                $response->forward('/admin/translation', 'You cannot delete demo translation keys.', 'error');
+
+                return $response;
+            }
+
             $response->redirect('/admin/translation');
             $arrForm = array('translation_id' => $id);
 
@@ -131,6 +143,15 @@ class translationController extends baseController
             // form submitted?
             if ($request->getRequestType() == 'POST')
             {
+
+                if ($id && $id <= 3)
+                {
+                    $response->forward('/admin/translation', 'You cannot edit demo translation keys.', 'error');
+
+                    return $response;
+                }
+
+
                 $arrForm = $request->postParam();
 
                 if ($arrStoreResult = $this->getService('translation')->store($action, $arrForm))
@@ -194,6 +215,32 @@ class translationController extends baseController
         return $response;
     }
 
+
+    /**
+     * Toggle user selected language
+     */
+    public function toggleLanguage()
+    {
+        $request = $this->getRequest();
+        $prefLang = $request->sessionParam('language');
+        $redirectURL = '/admin/translation/example';
+
+        if ($request->serverParam('HTTP_REFERER'))
+            $redirectURL = $request->serverParam('HTTP_REFERER');
+
+        if ($prefLang == 'en_US')
+            $newLang = 'fr_FR';
+        else
+            $newLang = 'en_US';
+
+        $request->sessionParam('language', $newLang);
+
+        $response = $this->response();
+        $response->forward($redirectURL, 'Your language has been switched to <b>'. $newLang .'</b>', 'success');
+
+        Return $response;
+    }
+
     /**
      * navmnu helper..
      */
@@ -202,6 +249,7 @@ class translationController extends baseController
         $this->arrHTMLMetas['title']['value'] = 'Translations';
         $arrTplParams['currentNav'] = 'translation';
         $arrTplParams['selectedSubNav'] = array(
+                                                    'grid2' => 'Grid #2',
                                                      'add' => 'Add New',
                                                      'example' => 'Example'
                                                 );

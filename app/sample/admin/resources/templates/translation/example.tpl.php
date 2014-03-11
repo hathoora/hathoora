@@ -4,7 +4,7 @@
 ?>
     <div class="rightPanel docs">
         <div class="box">
-            <h1>Translations: Example</h1>
+            <h1>Translation: Example</h1>
 
             <p>
                 This page shows an example of how translation can be used.

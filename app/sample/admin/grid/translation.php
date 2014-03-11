@@ -21,10 +21,39 @@ class translation extends grid
     {
         $table_id = 'tk_grd';
 
+        $arrGridPrepare['table']['fields']['available'] = array(__CLASS__, 'fields');
         $arrGridPrepare['table']['fields']['jail'] = array('translation_id', 'translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
 
         // default columns to show when hathoora grid renders for first time
         $arrGridPrepare['table']['fields']['default'] = array('translation_id', 'translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
+
+        // allow users to change columns (delete, reorder etc..);
+        $arrGridPrepare['table']['fields']['dynamic'] = true;
+
+        self::translationGridHelper($table_id, $arrGridPrepare);
+
+        // Sanitize grid (sort, order, limit and where criteria)
+        self::prepare($arrGridPrepare, $arrFormData);
+
+        return parent::getService('translation')->grid($arrGridPrepare, $render);
+    }
+
+    /**
+     * Returns translation routes
+     *
+     * @param array $arrGridPrepare for overriding stuff
+     * @param array $arrFormData
+     * @param bool $render or return array of results
+     * @return array|mixed
+     */
+    public static function getTranslationRoute($arrGridPrepare = array(), $arrFormData = array(), $render = true)
+    {
+        $table_id = 'tk_grd_rts';
+
+        $arrGridPrepare['table']['fields']['available'] = array(__CLASS__, 'fieldsRoute');
+        $arrGridPrepare['table']['fields']['jail'] = array('route', 'translation_keys');
+        // default columns to show when hathoora grid renders for first time
+        $arrGridPrepare['table']['fields']['default'] = array('route', 'translation_keys');
 
         // allow users to change columns (delete, reorder etc..);
         $arrGridPrepare['table']['fields']['dynamic'] = true;
@@ -54,7 +83,7 @@ class translation extends grid
                 'noResults' => !empty($arrGridPrepare['table']['message']['noResults']) ? $arrGridPrepare['table']['message']['noResults'] : 'No results found, click <a href="/admin/translation/add">here</a> to add one.',
             ),
             'fields' => array(
-                'available' => array(__CLASS__, 'fields'),
+                'available' => !empty($arrGridPrepare['table']['fields']['available']) ? $arrGridPrepare['table']['fields']['available'] : null,
                 'jail' => !empty($arrGridPrepare['table']['fields']['jail']) ? $arrGridPrepare['table']['fields']['jail'] : null,
                 'default' => !empty($arrGridPrepare['table']['fields']['default']) ? $arrGridPrepare['table']['fields']['default'] : null,
                 'dynamic' => !empty($arrGridPrepare['table']['fields']['dynamic']) ? $arrGridPrepare['table']['fields']['dynamic'] : false,
@@ -111,7 +140,15 @@ class translation extends grid
             ),
             'language' => array(
                 'name' => 'Lang',
-                'classTH' => 's'
+                'classTH' => 's',
+                'dependency' => array(
+                    'joinRow' => array(
+                        'translation_value' => 'INNER JOIN translation_value tv ON (tk.translation_id = tv.translation_id)'
+                    ),
+                    'joinTotal' => array(
+                        'translation_value' => 'INNER JOIN translation_value tv ON (tk.translation_id = tv.translation_id)'
+                    ),
+                )
             ),
             'translationFieldNameNotInDbField' => array(
                 'name' => 'Translation',
@@ -124,9 +161,14 @@ class translation extends grid
                 'dependency' => array(
                     'selectField' => array(
                         'translation' => 'translation'
-                    )
+                    ),
+                    'joinRow' => array(
+                        'translation_value' => 'INNER JOIN translation_value tv ON (tk.translation_id = tv.translation_id)'
+                    ),
+                    'joinTotal' => array(
+                        'translation_value' => 'INNER JOIN translation_value tv ON (tk.translation_id = tv.translation_id)'
+                    ),
                 )
-
             ),
             'actions' => array(
                 'name' => 'Actions',
@@ -135,6 +177,38 @@ class translation extends grid
                 'content' => array(
                     'function' => array(__CLASS__, 'renderTranslationActions', array('exampleContext' => 1))
                 )
+            )
+        );
+
+        return $arrFields;
+    }
+
+    /**
+     * returns an array of all the valid fields that can be used to select, sort, search etc..
+     */
+    public static function fieldsRoute()
+    {
+        $arrFields = array(
+            'route' => array(
+                'name' => 'Route',
+                'classTH' => 'm',
+                'sort' => true,
+                'dependency' => array(
+                    'joinRow' => array(
+                        'translation_route' => 'INNER JOIN translation_route tr ON (tk.translation_id = tr.translation_id)'
+                    ),
+                    'joinTotal' => array(
+                        'translation_route' => 'INNER JOIN translation_route tr ON (tk.translation_id = tr.translation_id)'
+                    ),
+                )
+            ),
+            'translation_keys' => array(
+                'name' => 'TKs',
+                'classTH' => 'm',
+                'content' => array(
+                    'function' => array(__CLASS__, 'renderRouteTranslationKeys')
+                ),
+                'dbField' => false
             )
         );
 
@@ -157,6 +231,18 @@ class translation extends grid
     public static function renderTranslationField($value, &$arrRow, &$arrGridData)
     {
         return htmlentities($arrRow['translation']);
+    }
+
+    /**
+     * Render translation keys for a route
+     *
+     * @param $value
+     * @param $arrRow
+     * @param $arrGridData
+     */
+    public static function renderRouteTranslationKeys($value, &$arrRow, &$arrGridData)
+    {
+
     }
 
     /**

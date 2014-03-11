@@ -4,11 +4,8 @@
 ?>
     <div class="rightPanel docs">
         <div class="box">
-            <h1>Translation</h1>
+            <h1>Translation: Routes</h1>
 
-            <p>
-                Following is an example of <a href="/docs/v1/grid">grid</a>.
-            </p>
             <?php echo $grid; ?>
         </div>
     </div>

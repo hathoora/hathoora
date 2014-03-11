@@ -11,7 +11,6 @@ class viewController extends controller
     public $arrNav = array(
         'Overview' => array(
             'introduction' => 'Introduction',
-            'concetps' => 'Concepts',
             'organization' => 'Organization'
         ),
         'Getting Started' => array(
@@ -35,9 +34,7 @@ class viewController extends controller
             'cli' => 'Command Line'
         ),
         'Samples' => array(
-            'admin' => 'Admin Panel',
-            'lists' => 'Lists',
-            'chat' => 'Chat'
+            '/admin' => 'Admin Panel',
         )
     );
 

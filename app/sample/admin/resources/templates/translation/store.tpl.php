@@ -6,7 +6,7 @@
         <div class="box">
             <form method="post" class="smart-green" id="translationForm">
                 <input type="hidden" name="translation_id" value="<?php echo $translation_id; ?>" />
-                <h1>Translations: <?php echo $arrForm['translation_key']; ?></h1>
+                <h1>Translation: <?php echo $arrForm['translation_key']; ?></h1>
                 <label>
                     <span>Translation Key:</span>
                     <input type="text" name="translation_key" value="<?php echo $arrForm['translation_key']; ?>" />
