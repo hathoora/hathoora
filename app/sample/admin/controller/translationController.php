@@ -189,8 +189,10 @@ class translationController extends baseController
         );
 
         $x = $this->getService('translation')->t(
-            'blahblah', array('name' => 'World')
+            'test', array('blah' => 'UPPER CASE usman')
         );
+
+        //var_dump($x);
 
         // get translations for route
         $routeTranslations = $this->getService('translation')->getRouteTranslations('hathoora_translation_route',
@@ -228,10 +230,10 @@ class translationController extends baseController
         if ($request->serverParam('HTTP_REFERER'))
             $redirectURL = $request->serverParam('HTTP_REFERER');
 
-        if ($prefLang == 'en_US')
-            $newLang = 'fr_FR';
-        else
+        if ($prefLang == 'fr_FR')
             $newLang = 'en_US';
+        else
+            $newLang = 'fr_FR';
 
         $request->sessionParam('language', $newLang);
 

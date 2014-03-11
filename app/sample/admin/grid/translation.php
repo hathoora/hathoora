@@ -172,7 +172,8 @@ class translation extends grid
             ),
             'actions' => array(
                 'name' => 'Actions',
-                'dbField' => false,
+                'dbField' => null,
+                'canDel' => false,
                 'classTH' => 's',
                 'content' => array(
                     'function' => array(__CLASS__, 'renderTranslationActions', array('exampleContext' => 1))
@@ -191,15 +192,23 @@ class translation extends grid
         $arrFields = array(
             'route' => array(
                 'name' => 'Route',
-                'classTH' => 'm',
+                'classTH' => 's',
                 'sort' => true,
                 'dependency' => array(
+                    'selectField' => array(
+                        // no point getting translation_id as it is not unique
+                        'translationid:literal' => 'NULL as translation_id',
+                        'translationkeys:literal' => 'GROUP_CONCAT(tk.translation_key) as translation_keys',
+                        'translationids:literal' => 'GROUP_CONCAT(tk.translation_id) as translation_ids'
+                    ),
                     'joinRow' => array(
                         'translation_route' => 'INNER JOIN translation_route tr ON (tk.translation_id = tr.translation_id)'
                     ),
                     'joinTotal' => array(
                         'translation_route' => 'INNER JOIN translation_route tr ON (tk.translation_id = tr.translation_id)'
                     ),
+                    'groupTotal' => array('tr.route' => 'tr.route'),
+                    'groupRow' => array('tr.route' => 'tr.route'),
                 )
             ),
             'translation_keys' => array(
@@ -208,7 +217,7 @@ class translation extends grid
                 'content' => array(
                     'function' => array(__CLASS__, 'renderRouteTranslationKeys')
                 ),
-                'dbField' => false
+                'dbField' => null
             )
         );
 
@@ -242,7 +251,20 @@ class translation extends grid
      */
     public static function renderRouteTranslationKeys($value, &$arrRow, &$arrGridData)
     {
+        $html = null;
+        if (!empty($arrRow['translation_keys']) && !empty($arrRow['translation_ids']))
+        {
+            $arrTks = explode(',', $arrRow['translation_keys']);
+            $arrIds = explode(',', $arrRow['translation_ids']);
+            foreach ($arrTks as $i => $tk)
+            {
+                if ($html) $html .= '<br/>';
+                $html .= '<a href="/admin/translation/edit/' . $arrIds[$i] .'">'. $tk . '</a>';
+            }
 
+        }
+
+        return $html;
     }
 
     /**
