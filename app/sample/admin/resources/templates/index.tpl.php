@@ -6,6 +6,9 @@
         <div class="box">
             <h1>Admin Panel</h1>
             <p>
+                Please import <code class="inline">HATHOORA_ROOTPATH/app/sample/admin/data/admin-sample.sql</code> to follow the examples.
+            </p>
+            <p>
                 This is admin home screen. Use the navigation on left to browse around. This sample admin application has not implemented any authentication and left it up to you to implement to one that meet your needs.
             </p>
             <p>

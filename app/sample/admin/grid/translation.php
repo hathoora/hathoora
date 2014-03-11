@@ -21,10 +21,10 @@ class translation extends grid
     {
         $table_id = 'tk_grd';
 
-        $arrGridPrepare['table']['fields']['jail'] = array('translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
+        $arrGridPrepare['table']['fields']['jail'] = array('translation_id', 'translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
 
         // default columns to show when hathoora grid renders for first time
-        $arrGridPrepare['table']['fields']['default'] = array('translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
+        $arrGridPrepare['table']['fields']['default'] = array('translation_id', 'translation_key', 'language', 'translationFieldNameNotInDbField', 'actions');
 
         // allow users to change columns (delete, reorder etc..);
         $arrGridPrepare['table']['fields']['dynamic'] = true;
@@ -92,6 +92,15 @@ class translation extends grid
     public static function fields()
     {
         $arrFields = array(
+            'translation_id' => array(
+                'name' => 'ID',
+                'classTH' => 's',
+                'dbField' => 'tk.translation_id',
+                'sort' => true,
+                'content' => array(
+                    'link' => '/admin/translation/edit/{{translation_id}}'
+                )
+            ),
             'translation_key' => array(
                 'name' => 'TK',
                 'classTH' => 'm',
@@ -163,6 +172,7 @@ class translation extends grid
     public static function renderTranslationActions($value, &$arrRow, &$arrGridData, $context = null)
     {
         // logic as needed, who can view delete button?
-        return '<a href="/admin/translation/edit/{{translation_id}}">Edit</a> | <a href="/admin/translation/delete/{{translation_id}}">Del</a>';
+        return '<a href="/admin/translation/edit/{{translation_id}}">Edit</a> |
+                <a href="/admin/translation/delete/{{translation_id}}" onclick="if (!confirm(\'Are you sure you want to delete all entries for {{translation_key}}?\')) return false;">Del</a>';
     }
 }

@@ -47,13 +47,13 @@
                             if ($_i != 1)
                             {
                                 echo '
-                                    <textarea class="translation" name="languages['. $_lang.']">'. $_v .'</textarea>
+                                    <textarea class="translation" name="languages['. $_lang.']">'. htmlentities($_v) .'</textarea>
                                     <div class="desc" style="margin-top:5px;">Using HTML as translation for demonstration.</div>';
                             }
                             else
                             {
                                 echo '
-                                    <input type="text" name="languages['. $_lang.']" value="'. $_v .'" />
+                                    <input type="text" name="languages['. $_lang.']" value="'. htmlentities($_v) .'" />
                                     <div class="desc">Using another example of translation as simple text.</div>';
                             }
 
@@ -65,7 +65,8 @@
 
                 <label>
                     <span>&nbsp;</span>
-                    <input type="submit" class="button" value="Submit" />
+                    <input type="submit" class="button" value="Submit" /><br/>
+                    <div class="desc" style="margin-top:3px;">Once updated related cache keys are re-seeded and related route caches are invalidated.</div>
                 </label>
             </form>
         </div>

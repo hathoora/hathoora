@@ -1,6 +1,7 @@
 <style>
     #container #body .leftPanel { position: fixed; left: 0px; width: 130px; }
     #container #body .rightPanel { margin-left: 0px; width: 100%; }
+    #container #body .rightPanel code.hljs { width:964px; }
 </style>
 <div class="leftPanel">
     <?php
