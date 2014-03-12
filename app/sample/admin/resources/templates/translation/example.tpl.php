@@ -5,13 +5,18 @@
     <div class="rightPanel docs">
         <div class="box">
             <h1>Translation: Example</h1>
-
+            <ul class="outline">
+                <li><a href="#single">Single Translation Key</a></li>
+                <li><a href="#route">Route Based Translation Keys</a></li>
+                <li><a href="#filters">Filters</a></li>
+            </ul>
             <p>
                 This page shows an example of how translation can be used.
             </p>
 
+            <a name="single"></a>
+            <h2>Single Translation Key</h2>
             <p>
-                <b>Example 1:</b>
                 In this example we are displaying a single translation for key <a href="/admin/translation/edit/1">hathoora_hello_world</a>.
             </p>
             <p>
@@ -32,8 +37,11 @@
                     <?php echo $helloTranslation; ?>
                 </code>
             </pre>
+
+            <a name="route"></a>
+            <h2>Route Based Translation Keys</h2>
             <p>
-                <b>Example 2</b>: Above example will make one call to get one translation, if you need to fetch multiple translations you can associate translations to a route and fetch them. This example is using <a href="/admin/translation/edit/2">hathoora_route_example_title</a> and <a href="/admin/translation/edit/3">hathoora_route_example_body</a>. The controller code looks like this:
+                Above example will make one call to get one translation, if you need to fetch multiple translations you can associate translations to a route and fetch them. This example is using <a href="/admin/translation/edit/2">hathoora_route_example_title</a> and <a href="/admin/translation/edit/3">hathoora_route_example_body</a>. The controller code looks like this:
             </p>
             <pre>
                 <code class="hljs php">
@@ -65,6 +73,57 @@
             <p>
                 Now click <a href="/admin/translation/toggle-language">here</a> to toggle language to see the difference.
             </p>
+
+            <a name="filters"></a>
+            <h2>Filters</h2>
+            <p>
+                Using translation inside template and using filters. In this example we are using key <a href="/admin/translation/edit/4">hathoora_hello_world_filter</a>.
+            </p>
+            <pre>
+                <code class="hljs php">
+                    echo $this->getService('translation')->t(
+                                        'hathoora_hello_world_filter', array('name' => ' Hathoora PHP Framework '));
+                </code>
+            </pre>
+            <p>
+                The translation key has the following translation for en_US
+            </p>
+            <pre>
+                <code class="hljs html">
+                    Name is trimmed: "{{name|trim}}"&lt;br/&gt;
+                    &lt;br/&gt;
+                    Custom filter: "{{name|customFilter(3)|trim}}"
+                </code>
+            </pre>
+            <p>
+                In this example we are using builtin <code class="e">trim</code> filter and a custom filter called and <code class="e">customFilter</code> which takes one parameter.
+            </p>
+            <p>
+                And we added a custom filter class that contains a <code class="inline">static</code> <code class="e">customFilter</code> like so in config.
+            </p>
+            <pre>
+                <code class="hljs html">
+                    # File admin/config/config_prod.yml
+
+                    hathoora:
+                        translation:
+                            ....
+
+                        # filter used in translation helper
+                        detokenizerFilters:
+                            - \admin\helper\translationFilter
+                </code>
+            </pre>
+            <p>
+                The output of result is shown below.
+            </p>
+            <pre>
+                <code class="hljs html">
+                    <?php echo $this->getService('translation')->t(
+                            'hathoora_hello_world_filter', array('name' => ' Hathoora PHP Framework '));
+                    ?>
+                </code>
+            </pre>
         </div>
     </div>
     <div class="clearfix"></div>

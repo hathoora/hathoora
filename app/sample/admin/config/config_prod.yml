@@ -15,6 +15,10 @@ hathoora:
         dsn: default
         languages: [ en_US, fr_FR ]
 
+    # filter used in translation helper
+    detokenizerFilters:
+        - \admin\helper\translationFilter
+
     database:
         default: mysql://dbuser:dbpassword@localhost:3306/dbname
 

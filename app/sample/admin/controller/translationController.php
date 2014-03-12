@@ -112,7 +112,7 @@ class translationController extends baseController
         if ($action == 'delete')
         {
             // don't let others delete demo tks
-            if ($id <= 3)
+            if ($id <= 4)
             {
                 $response->forward('/admin/translation', 'You cannot delete demo translation keys.', 'error');
 
@@ -143,17 +143,13 @@ class translationController extends baseController
             // form submitted?
             if ($request->getRequestType() == 'POST')
             {
-
-                if ($id && $id <= 3)
+                if ($id && $id <= 4)
                 {
                     $response->forward('/admin/translation', 'You cannot edit demo translation keys.', 'error');
-
                     return $response;
                 }
 
-
                 $arrForm = $request->postParam();
-
                 if ($arrStoreResult = $this->getService('translation')->store($action, $arrForm))
                 {
                     $response->setFlash($arrStoreResult['message'], $arrStoreResult['status']);
@@ -187,12 +183,6 @@ class translationController extends baseController
         $helloTranslation = $this->getService('translation')->t(
             'hathoora_hello_world', array('name' => 'World')
         );
-
-        $x = $this->getService('translation')->t(
-            'test', array('blah' => 'UPPER CASE usman')
-        );
-
-        //var_dump($x);
 
         // get translations for route
         $routeTranslations = $this->getService('translation')->getRouteTranslations('hathoora_translation_route',

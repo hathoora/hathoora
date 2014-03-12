@@ -239,7 +239,7 @@ class translation extends grid
      */
     public static function renderTranslationField($value, &$arrRow, &$arrGridData)
     {
-        return htmlentities($arrRow['translation']);
+        return nl2br(htmlentities($arrRow['translation']));
     }
 
     /**
