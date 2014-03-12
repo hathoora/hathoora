@@ -60,6 +60,6 @@
         </code>
     </pre>
     <p>
-        To learn more and see translation in action click <a href="/admin/translation">here</a>.
+        To learn more about translations, filters and to see translation in action click <a href="/admin/translation">here</a>.
     </p>
 </div>
