@@ -38,7 +38,8 @@
             -moz-box-shadow:    0px 4px 3px rgba(50, 50, 50, 0.3);
             box-shadow:         0px 4px 3px rgba(50, 50, 50, 0.3); }
         #container #header #header_inner { width:980px; margin:0 auto;  }
-        #container #header #header_inner h1 { float:left; color: #FFFFFF; font-size: 40px; padding:15px 0 0 0; text-shadow: 0 1px 2px #000; }
+        #container #header #header_inner h1 { float:left; color: #FFFFFF; font-size: 28px; padding:30px 0 0 0; text-shadow: 0 1px 2px #000; }
+        #container #header #header_inner h1 img { float:left; height:60px; margin-top:-22px; margin-right:5px;}
         #container #header #header_inner h1 a { color:#fff; }
         #container #header #header_inner ul.menu { float: right; font-size: 16px; list-style: none; margin: 17px 0 0 22px;}
         #container #header #header_inner ul.menu li { display:block; float:left; padding: 4px 8px; margin-right:5px; background: none repeat scroll 0 0 #990000; text-transform: uppercase; }
@@ -74,6 +75,7 @@
         .docs ul.outline li { margin-bottom:6px; list-style: none;  }
         .docs h2 { color:#006699; font-size:22px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
          #container #footer { width:980px; margin:0 auto; }
+         img.imgi { margin-left:-15px; width:744px; }
          code.hljs { overflow:auto; margin-left:-15px; width:744px; }
          .e { color: #AA1144; }
          .gray { color:#ccc; }
@@ -248,7 +250,121 @@
          .smart-green .desc { color:#ccc; font-size: 90%;}
          .smart-green select.multi { clear:both; display:block; width:275px; height: 60px; overflow: auto; }
     </style>
-    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+
+    <style>
+        /*
+
+        Style with support for rainbow parens
+
+        */
+
+        .hljs {
+          display: block;
+          padding: 0.5em;
+          background: #474949;
+          color: #d1d9e1;
+        }
+
+
+        .hljs-body,
+        .hljs-collection {
+           color: #d1d9e1;
+        }
+
+        .hljs-comment,
+        .hljs-template_comment,
+        .diff .hljs-header,
+        .hljs-doctype,
+        .lisp .hljs-string,
+        .hljs-javadoc {
+          color: #969896;
+          font-style: italic;
+        }
+
+        .hljs-keyword,
+        .clojure .hljs-attribute,
+        .hljs-winutils,
+        .javascript .hljs-title,
+        .hljs-addition,
+        .css .hljs-tag {
+          color: #cc99cc;
+        }
+
+        .hljs-number { color: #f99157; }
+
+        .hljs-command,
+        .hljs-string,
+        .hljs-tag .hljs-value,
+        .hljs-phpdoc,
+        .tex .hljs-formula,
+        .hljs-regexp,
+        .hljs-hexcolor {
+          color: #8abeb7;
+        }
+
+        .hljs-title,
+        .hljs-localvars,
+        .hljs-function .hljs-title,
+        .hljs-chunk,
+        .hljs-decorator,
+        .hljs-built_in,
+        .lisp .hljs-title,
+        .hljs-identifier {
+          color: #b5bd68;
+        }
+
+        .hljs-class .hljs-keyword {
+          color: #f2777a;
+        }
+
+        .hljs-variable,
+        .lisp .hljs-body,
+        .smalltalk .hljs-number,
+        .hljs-constant,
+        .hljs-class .hljs-title,
+        .hljs-parent,
+        .haskell .hljs-label,
+        .hljs-id,
+        .lisp .hljs-title,
+        .clojure .hljs-title .hljs-built_in {
+           color: #ffcc66;
+        }
+
+        .hljs-tag .hljs-title,
+        .hljs-rules .hljs-property,
+        .django .hljs-tag .hljs-keyword,
+        .clojure .hljs-title .hljs-built_in {
+          font-weight: bold;
+        }
+
+        .hljs-attribute,
+        .clojure .hljs-title {
+          color: #81a2be;
+        }
+
+        .hljs-preprocessor,
+        .hljs-pragma,
+        .hljs-pi,
+        .hljs-shebang,
+        .hljs-symbol,
+        .hljs-symbol .hljs-string,
+        .diff .hljs-change,
+        .hljs-special,
+        .hljs-attr_selector,
+        .hljs-important,
+        .hljs-subst,
+        .hljs-cdata {
+          color: #f99157;
+        }
+
+        .hljs-deletion {
+          color: #dc322f;
+        }
+
+        .tex .hljs-formula {
+          background: #eee8d5;
+        }
+    </style>
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>

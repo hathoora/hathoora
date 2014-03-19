@@ -89,7 +89,7 @@ class translation extends grid
                 'dynamic' => !empty($arrGridPrepare['table']['fields']['dynamic']) ? $arrGridPrepare['table']['fields']['dynamic'] : false,
             ),
             'limit' => array(
-                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 20,
+                'default' => !empty($arrGridPrepare['table']['limit']['default']) && $arrGridPrepare['table']['limit']['default'] <= 20 ? $arrGridPrepare['table']['limit']['default'] : 10,
                 'limits' => array(20, 50),
                 'max' => 50,
             ),
@@ -127,7 +127,7 @@ class translation extends grid
                 'dbField' => 'tk.translation_id',
                 'sort' => true,
                 'content' => array(
-                    'link' => '/admin/translation/edit/{{translation_id}}'
+                    'link' => '/admin/translation/view/{{translation_id}}'
                 )
             ),
             'translation_key' => array(
@@ -135,7 +135,7 @@ class translation extends grid
                 'classTH' => 'm',
                 'sort' => true,
                 'content' => array(
-                    'link' => '/admin/translation/edit/{{translation_id}}'
+                    'link' => '/admin/translation/view/{{translation_id}}'
                 )
             ),
             'language' => array(

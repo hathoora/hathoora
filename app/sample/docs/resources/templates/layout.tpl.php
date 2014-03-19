@@ -9,7 +9,10 @@
     <div id="container">
         <div id="header">
             <div id="header_inner">
-                <h1><a href="http://hathoora.org">Hathoora PHP Framework</a></h1>
+                <h1><a href="http://hathoora.org">
+                        <img src="/_assets/_hathoora/logo.png" alt="Hathoora PHP Framework"/>
+                            Hathoora PHP Framework
+                </a></h1>
                 <ul class="menu">
                     <li><a href="http://www.hathoora.org/docs/v1/installation">Download</a></li>
                     <li><a href="http://www.hathoora.org/admin">Admin Site</a></li>

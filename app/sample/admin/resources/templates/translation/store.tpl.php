@@ -64,10 +64,33 @@
                 ?>
 
                 <label>
+                    <span>Notes:</span>
+                    <div class="clearfix"></div>
+                    <textarea name="notes" style="height:60px;"><?php echo !empty($arrForm['notes']) ? htmlentities($arrForm['notes']) : null; ?></textarea>
+                    <div class="desc">Any notes about translation.</div>
+                </label>
+
+            <?php
+                if ($action != 'view')
+                {
+            ?>
+                <label>
                     <span>&nbsp;</span>
                     <input type="submit" class="button" value="Submit" /><br/>
                     <div class="desc" style="margin-top:3px;">Once updated related cache keys are re-seeded and related route caches are invalidated.</div>
                 </label>
+            <?php
+                }
+                else
+                {
+            ?>
+                <label>
+                    <br/>
+                    <a href="/admin/translation/edit/<?php echo $arrForm['translation_id']; ?>" class="button">Edit</a>
+                </label>
+            <?php
+                }
+            ?>
             </form>
         </div>
     </div>
@@ -95,27 +118,44 @@
                 }
             });
 
-            // add route
-            $('#addRoute').click(function()
-            {
-                route = prompt('Enter a new route, format is app:controller:action or you can use any other name for manual retrieval')
-                if (route)
+            <?php
+                if ($action != 'view')
                 {
-                    var o = new Option(route, route);
-                    $('#routes').append(o);
-                }
-            });
+            ?>
+                    // add route
+                    $('#addRoute').click(function()
+                    {
+                        route = prompt('Enter a new route, format is app:controller:action or you can use any other name for manual retrieval')
+                        if (route)
+                        {
+                            var o = new Option(route, route);
+                            $('#routes').append(o);
+                        }
+                    });
 
-            // remove route
-            $('#removeRoute').click(function()
-            {
-                if ($('#routes').val())
-                {
-                    $('#routes option:selected').remove();
+                    // remove route
+                    $('#removeRoute').click(function()
+                    {
+                        if ($('#routes').val())
+                        {
+                            $('#routes option:selected').remove();
+                        }
+                        else
+                            alert('Select a route first.');
+                    });
+            <?php
                 }
                 else
-                    alert('Select a route first.');
-            });
+                {
+            ?>
+                $.each($('form input, form textarea'), function(i,v)
+                {
+                    $(v).attr('readonly', true);
+                    $(v).attr('disabled', true);
+                });
+            <?php
+                }
+            ?>
 
             $('textarea.translation').ckeditor({
                 height: 100,

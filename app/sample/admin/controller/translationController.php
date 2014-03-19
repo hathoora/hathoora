@@ -47,7 +47,7 @@ class translationController extends baseController
    /**
      * Translation's home
      */
-    public function grid2()
+    public function routes()
     {
         $request = $this->getRequest();
         $arrTplParams = array();
@@ -64,7 +64,7 @@ class translationController extends baseController
         if (!$request->isAjax())
         {
             $this->navMenuHelper($arrTplParams);
-            $template = $this->template('translation/grid2.tpl.php', $arrTplParams);
+            $template = $this->template('translation/routes.tpl.php', $arrTplParams);
             $response = $this->response($template);
         }
         else
@@ -73,6 +73,15 @@ class translationController extends baseController
         }
 
         return $response;
+    }
+
+
+    /**
+     * edit translation
+     */
+    public function view($id = null)
+    {
+        return $this->store('view', $id);
     }
 
     /**
@@ -125,23 +134,25 @@ class translationController extends baseController
             if ($arrStoreResult = $this->getService('translation')->store('delete', $arrForm))
                 $response->setFlash($arrStoreResult['message'], $arrStoreResult['status']);
         }
-        else if ($action == 'edit')
+        else if ($action == 'edit' || $action == 'view')
             $arrInfo = $this->getService('translation')->info($id);
 
         // id doesn't exist..
         if ($action == 'edit' && !is_array($arrInfo))
             $response->forward('/admin/translation', 'Incorrect translation id', 'error');
-        else if ($action == 'add' || $action == 'edit')
+        else if (($action == 'add' || $action == 'edit') || $action == 'view')
         {
             $request = $this->getRequest();
             $arrTplParams = array();
+            $arrTplParams['action'] = $action;
+
             $this->navMenuHelper($arrTplParams);
             $arrTplParams['translation_id'] = $id;
             $arrTplParams['arrLanguages'] = $this->getService('translation')->getLanguages();
             $arrTplParams['arrForm'] =& $arrInfo;
 
             // form submitted?
-            if ($request->getRequestType() == 'POST')
+            if (($action == 'add' || $action == 'edit') && $request->getRequestType() == 'POST')
             {
                 if ($id && $id <= 4)
                 {
@@ -241,9 +252,9 @@ class translationController extends baseController
         $this->arrHTMLMetas['title']['value'] = 'Translations';
         $arrTplParams['currentNav'] = 'translation';
         $arrTplParams['selectedSubNav'] = array(
-                                                    'grid2' => 'Grid #2',
-                                                     'add' => 'Add New',
-                                                     'example' => 'Example'
+                                                    'add' => 'Add New',
+                                                    'routes' => 'Routes',
+                                                    'example' => 'Usage'
                                                 );
     }
 }

@@ -4,7 +4,7 @@
 ?>
     <div class="rightPanel docs">
         <div class="box">
-            <h1>Translation: Example</h1>
+            <h1>Translation: Usage</h1>
             <ul class="outline">
                 <li><a href="#single">Single Translation Key</a></li>
                 <li><a href="#route">Route Based Translation Keys</a></li>
