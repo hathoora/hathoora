@@ -75,7 +75,6 @@ class translationController extends baseController
         return $response;
     }
 
-
     /**
      * edit translation
      */
@@ -140,7 +139,7 @@ class translationController extends baseController
         // id doesn't exist..
         if ($action == 'edit' && !is_array($arrInfo))
             $response->forward('/admin/translation', 'Incorrect translation id', 'error');
-        else if (($action == 'add' || $action == 'edit') || $action == 'view')
+        else if ($action == 'add' || $action == 'edit' || $action == 'view')
         {
             $request = $this->getRequest();
             $arrTplParams = array();
@@ -217,7 +216,6 @@ class translationController extends baseController
 
         return $response;
     }
-
 
     /**
      * Toggle user selected language

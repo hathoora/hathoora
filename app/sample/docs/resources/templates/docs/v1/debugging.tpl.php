@@ -4,6 +4,7 @@
         <li><a href="#configuration">Configuration</a></li>
         <li><a href="#webprofiler">Webprofiler</a></li>
         <li><a href="#logging">Logging</a></li>
+        <li><a href="#printr">printr() and vardump()</a></li>
     </ul>
 
     <a name="configuration"></a>
@@ -84,4 +85,27 @@
             hathoora\logger\logger::log($level, $message);
         </code>
     </pre>
+
+    <a name="printr"></a>
+    <h2>printr() and vardump()</h2>
+    <p>
+        There are two handy functions that are available for print_r() and var_dump() respectively. They simply display output nicely, with the possibility of exiting the code.
+    </p>
+    <pre>
+        <code class="hljs php">
+            printr($arr);
+            printr($arr, 'Die message');
+
+            vardump($var);
+            vardump($var, 'Die message');
+        </code>
+    </pre>
+    <p>
+        Also checkout the following debugging tools:
+    </p>
+    <ul>
+        <li><a href="http://krumo.sourceforge.net/" target="_blank">krumo</a></li>
+        <li><a href="https://github.com/leeoniya/dump_r.php" target="_blank">dump_r</a></li>
+        <li><a href="http://raveren.github.io/kint/" target="_blank">kint</a></li>
+    </ul>
 </div>
