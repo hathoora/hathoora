@@ -23,9 +23,20 @@
                     cache_service: @cache@
                     cache_time: 86400
                     dsn: default
-                    languages: [ en_US, fr_FR ]
 
-                # cache configurations
+                    # display empty translations keys, good for debugging
+                    show_empty: true # default value
+                    languages: [ en_US, fr_FR ]
+                    default_language: en_US
+
+                    # for debugging show translations keys, in below configuration passing
+                    # tkDebug=1 would show tks for debugging
+                    debug:
+                        # GET, HEADER
+                        method: GET
+                        parameter: tkDebug
+
+                # where cache service is defined as
                 cache:
                     debug: 1
                     pools:

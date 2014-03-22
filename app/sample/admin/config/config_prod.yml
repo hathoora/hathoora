@@ -12,7 +12,14 @@ hathoora:
         cache_service: @cache@
         cache_time: 86400
         dsn: default
+        show_empty: true
         languages: [ en_US, fr_FR ]
+        default_language: en_US
+        debug:
+            # GET, HEADER
+            method: GET
+            parameter: tkDebug
+
 
     # filter used in translation helper
     detokenizerFilters:
