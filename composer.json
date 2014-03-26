@@ -20,5 +20,8 @@
     },
     "autoload": {
         "psr-0": {"hathoora\\": "src/"}
+    },
+    "scripts": {
+        "post-package-install": "hathoora\\core\\install::postUpdate"
     }
 }
