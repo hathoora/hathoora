@@ -1,7 +1,7 @@
 <?php
 namespace admin\controller;
 
-use admin\grid\translation;
+use admin\grid\translationGrid;
 
 /**
  * Translation controller
@@ -23,10 +23,10 @@ class translationController extends baseController
 
         $arrGridPrepare = array(
             'table' => array(
-                'title' => 'Table using <code class="inline">admin\grid\translation\translation::getTranslations()</code>'
+                'title' => 'Table using <code class="inline">admin\grid\translation\translationGrid::getTranslations()</code>'
             )
         );
-        $arrTplParams['grid'] = translation::getTranslations($arrGridPrepare, $request->getParam(), $render = true);
+        $arrTplParams['grid'] = translationGrid::getTranslations($arrGridPrepare, $request->getParam(), $render = true);
 
 
         // this is not request for hathoora grid (via ajax)
@@ -54,10 +54,10 @@ class translationController extends baseController
 
         $arrGridPrepare = array(
             'table' => array(
-                'title' => 'Table using <code class="inline">admin\grid\translation\translation::getTranslationRoute()</code>'
+                'title' => 'Table using <code class="inline">admin\grid\translation\translationGrid::getTranslationRoute()</code>'
             )
         );
-        $arrTplParams['grid'] = translation::getTranslationRoute($arrGridPrepare, $request->getParam(), $render = true);
+        $arrTplParams['grid'] = translationGrid::getTranslationRoute($arrGridPrepare, $request->getParam(), $render = true);
 
 
         // this is not request for hathoora grid (via ajax)

@@ -18,7 +18,18 @@ class defaultController extends baseController
     {
         $this->arrHTMLMetas['title']['value'] = 'Admin Panel';
 
-        $arrTplParams = array();
+        $arrTplParams = array(
+            'widgets' => array(
+                'recentTranslation' => array(
+                    'title' => 'Recently Added Translations',
+                    'url' => '/widget/recentTranslation'
+                ),
+                'recentTranslation' => array(
+                    'title' => 'Recently Added Translations',
+                    'url' => '/widget/recentTranslation'
+                ),
+            )
+        );
         $template = $this->template('index.tpl.php', $arrTplParams);
         $response = $this->response($template);
         

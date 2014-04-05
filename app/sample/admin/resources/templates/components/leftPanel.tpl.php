@@ -1,9 +1,14 @@
 <style>
-    #container #body .leftPanel { position: fixed; left: 0px; width: 130px; }
+    #container #body .leftMenu {
+        width: 130px;
+        position: absolute;
+        top:95px;
+        left: 0;
+    }
     #container #body .rightPanel { margin-left: 0px; width: 100%; }
     #container #body .rightPanel code.hljs { width:964px; }
 </style>
-<div class="leftPanel">
+<div class="leftMenu">
     <?php
         if (isset($arrNav) && is_array($arrNav))
         {
