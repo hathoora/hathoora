@@ -28,7 +28,7 @@ class viewController extends controller
             'services' => 'Services',
             'database' => 'Database',
             'grid' => 'Grid',
-            'cache' => 'Caching',
+            'caching' => 'Caching',
             'listeners' => 'Listeners',
             'translations' => 'Translations',
             'cli' => 'Command Line'
