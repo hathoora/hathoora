@@ -3,12 +3,14 @@ app:
     # admin site
     admin:
         pattern: '/admin(|/)'
-        directory: sample
+        directory: hathoora
+            # showing example of custom namespacing
+        namespace: hathoora\admin
 
     # docs site
     docs:
         pattern: '/docs(|/)'
-        directory: sample
+        directory: hathoora
         dispatcher:
             class: customDispatcher
             method: dispatch
