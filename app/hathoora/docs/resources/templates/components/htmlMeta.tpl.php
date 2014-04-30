@@ -39,7 +39,7 @@
             box-shadow:         0px 4px 3px rgba(50, 50, 50, 0.3); }
         #container #header #header_inner { width:980px; margin:0 auto;  }
         #container #header #header_inner h1 { float:left; color: #FFFFFF; font-size: 28px; padding:30px 0 0 0; text-shadow: 0 1px 2px #000; }
-        #container #header #header_inner h1 img { float:left; height:60px; margin-top:-22px; margin-right:5px;}
+        #container #header #header_inner h1 img { float:left; height:60px; margin-top:-22px; margin-right:5px; width:82px; }
         #container #header #header_inner h1 a { color:#fff; }
         #container #header #header_inner ul.menu { float: right; font-size: 16px; list-style: none; margin: 17px 0 0 22px;}
         #container #header #header_inner ul.menu li { display:block; float:left; padding: 4px 8px; margin-right:5px; background: none repeat scroll 0 0 #990000; text-transform: uppercase; }
