@@ -1,12 +1,12 @@
 # configuration file for 'prod' environment
 hathoora:
     logger:
-        profiling: 1
+        profiling: 0
         logging:
-            enabled: 1
+            enabled: 0
             level: DEBUG
         webprofiler:
-            enabled: 1
+            enabled: 0
 
     template:
           engine:

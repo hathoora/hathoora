@@ -1,3 +1,16 @@
 # Import config which will be overwritten
 imports:
     - { resource: config_prod.yml }
+    
+hathoora:
+    logger:
+        profiling:
+            enabled: 1
+        logging:
+            enabled: 1
+            level: DEBUG
+        webprofiler:
+            enabled: 1
+            system: true
+            show_redirects: true
+            skip_on_ajax: true    

@@ -174,13 +174,8 @@
             hathoora:
                 cache:
                     pools:
-                        common_mem: { debug:1, driver: 'memcache', servers: [{host: "localhost", port: 11211}]}            
-                        common_redis: { driver: 'redis', servers: [{host: "localhost", port: 6379}]}       
-                        
+                        common_mem: { debug: 1, driver: 'memcache', servers: [{host: "localhost", port: 11211}]}            
+                        common_redis: { debug: 1, driver: 'redis', servers: [{host: "localhost", port: 6379}]}       
         </code>
     </pre>
-    <p>
-        Output (in webprofiler) would look something like this:
-    </p>
-    <img class="imgi" src="/_assets/_hathoora/webprofiler/webprofiler_screenshot_cache_debug.png" />
 </div>

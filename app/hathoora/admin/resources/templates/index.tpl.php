@@ -18,8 +18,8 @@
                 In this admin application you would see the following in action:
             </p>
             <ul>
-                <li><a href="/docs/v1/translation">Translations</a></li>
-                <li><a href="/docs/v1/cache">Cache</a></li>
+                <li><a href="/docs/v1/translations">Translations</a></li>
+                <li><a href="/docs/v1/caching">Cache</a></li>
                 <li><a href="/docs/v1/grid">Grid</a></li>
                 <li><a href="/docs/v1/database">Database</a></li>
             </ul>

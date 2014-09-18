@@ -23,10 +23,7 @@ hathoora:
 
     # filter used in translation helper
     detokenizerFilters:
-        - \admin\helper\translationFilter
-
-    database:
-        default: mysql://dbuser:dbpassword@localhost:3306/dbname
+        - hathoora\admin\helper\translationFilter
 
     # cache configurations
     cache:
