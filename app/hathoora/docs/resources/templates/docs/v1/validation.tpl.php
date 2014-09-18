@@ -273,6 +273,7 @@
         <li>minlength</li>
         <li>maxlength</li>
         <li>url</li>
+        <li>email</li>
         <li>min</li>
         <li>max</li>
         <li>numeric</li>
@@ -298,6 +299,9 @@
 
                             # must be a valid URL
                             'url' => true,
+
+                            # must be a valid URL
+                            'email' => true,
 
                             # minimum value to be 3
                             'min' => 3,
