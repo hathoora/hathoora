@@ -37,7 +37,14 @@
     <p>
         This command may take several minutes to run as Composer downloads Hathoora PHP Framework along with all of the vendor libraries that it needs. When it finishes, you should have a directory like <a href="/docs/v1/organization#layout">this</a>.
     </p>
-
+    <p>
+        Finally install all dependencies.
+    </p>
+    <pre>
+        <code class="hljs bash">
+            php composer.phar install
+        </code>
+    </pre>
 
     <a name="source"></a>
     <h2>Source</h2>
