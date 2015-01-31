@@ -34,6 +34,6 @@
     <a name="name"></a>
     <h2>Where does "Hathoora" come from?</h2>
     <p>
-        Hathoora (ہتھوڑا) is an <a href="http://en.wikipedia.org/wiki/Urdu_language" target="_blank">Urdu</a> word meanning hammer. Hammer is a tool meant to deliver an impact, to fit parts, to fogre and build things. That is the idea.
+        Hathoora (ہتھوڑا) is an <a href="http://en.wikipedia.org/wiki/Urdu_language" target="_blank">Urdu</a> word meanning hammer. Hammer is a tool meant to deliver an impact, to fit parts, to forge and build things. That is the idea.
     </p>
 </div>
