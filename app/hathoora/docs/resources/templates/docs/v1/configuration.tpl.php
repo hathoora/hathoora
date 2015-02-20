@@ -31,6 +31,14 @@
 
                 &lt;Directory /some/path/hathoora/docroot&gt;
                     AllowOverride All
+
+                    # if using apache 2.2, you might also need the following
+                    # Order Deny,Allow
+                    # Allow From All
+
+                    # if using apache 2.4, you might also need the following
+                    # Required All Granted
+
                 &lt;/Directory&gt;
             &lt;/VirtualHost&gt;
         </code>

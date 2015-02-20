@@ -4,7 +4,7 @@ app:
     admin:
         pattern: '/admin(|/)'
         directory: hathoora
-            # showing example of custom namespacing
+        # showing example of custom namespacing
         namespace: hathoora\admin
 
     # docs site

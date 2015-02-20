@@ -1,1 +1,21 @@
 # Define application or website that are being supported for dev environment
+# Define application or website that are being supported for prod environment
+app:
+    # admin site
+    admin:
+        pattern: '/admin(|/)'
+        directory: hathoora
+        # showing example of custom namespacing
+        namespace: hathoora\admin
+
+    # docs site
+    docs:
+        pattern: '/docs(|/)'
+        directory: hathoora
+        dispatcher:
+            class: customDispatcher
+            method: dispatch
+
+    # Default site
+    site:
+        default: true
