@@ -24,7 +24,7 @@
         article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
             /* HTML5 display-role reset for older browsers */
         article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-        body { line-height: 1; }
+        body { line-height: 1; font-family: monospace;}
         ol, ul { list-style: none; }
         blockquote, q { quotes: none; }
         blockquote:before, blockquote:after, q:before, q:after {	content: ''; content: none; }
@@ -76,7 +76,7 @@
         .docs h2 { color:#006699; font-size:22px; margin-bottom:10px; margin-top:40px; font-weight: bold;}
          #container #footer { width:980px; margin:0 auto; }
          img.imgi { margin-left:-15px; width:744px; }
-         code.hljs { overflow:auto; margin-left:-15px; width:744px; }
+         code.hljs { overflow:auto; /*margin-left:-15px; width:744px;*/ }
          .e { color: #AA1144; }
          .gray { color:#ccc; }
          code.inline {
@@ -252,16 +252,17 @@
     </style>
 
     <style>
-        /*
+        
+        /*Style with support for rainbow parens*/
 
-        Style with support for rainbow parens
-
-        */
+        pre, code {
+              font-family: monospace !important; 
+        }
 
         .hljs {
           display: block;
           padding: 0.5em;
-          background: #474949;
+          background: #2D1B1B;
           color: #d1d9e1;
         }
 
